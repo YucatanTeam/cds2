@@ -1,8 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+
+    // fetch header
+        fetch('http://cdsapply.ir/headers')
+            .then(response => response.json())
+            .then(headers => {
+
+                document.getElementById("main_logo").setAttribute("src", "http://cdsapply.ir"+headers[0].logo.url)
+                document.getElementById("main_backimg").setAttribute("data-image-src", "http://cdsapply.ir"+headers[0].background_img.url)
+                document.getElementById("main_first_line").appendChild(document.createTextNode(headers[0].first_line))
+                document.getElementById("main_second_line").appendChild(document.createTextNode(headers[0].second_line))
+                document.getElementById("main_third_line").appendChild(document.createTextNode(headers[0].third_line))
+            })
+
+
+    // fetch certificates
+        fetch('http://cdsapply.ir/candocertificates')
+            .then(response => response.json())
+            .then(candocertificates => {
+
+                var div = document.createElement("div")
+                div.appendChild(document.createTextNode(candocertificates[0].content))
+                div.setAttribute("style", "font-size:18px")
+                div.setAttribute("data-aos", "fade-left")
+                document.getElementById("candocertificates").appendChild(div)
+            })
+</script>
 <head>
 
-    <title>کندو</title>
+    <title>Cando Certificate | CDS</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="موسسه اعزام دانشجو کندو">
@@ -22,8 +49,6 @@
     <link rel="stylesheet" type="text/css" href="styles/blog_responsive.css">
 </head>
 <style>
-
-
     @font-face {
         font-family: myFirstFont;
         src:url("font/Sahel.ttf");
@@ -54,10 +79,28 @@
     .hov:hover{
         color: #FFCD05;
     }
-
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 1700px) {
         .hid {
             display: none;
+        }
+    }
+    .boxt {
+
+        padding: 20px;
+    }
+    @media screen and (max-width: 600px) {
+        .boxt {
+            padding: 3px;
+        }
+    }
+    .box2 {
+
+        margin: 5%;
+    }
+    @media screen and (max-width: 600px) {
+        .box2 {
+            margin-left: 20px;
+            margin-top: 80px;
         }
     }
     .search-input{
@@ -88,7 +131,7 @@
         background-color: transparent;
     }
 </style>
-<body  style="background-image: url(images/loginbg.png);background-size:20%;background-repeat: repeat;font-family: myFirstFont;">
+<body style="background-image: url(images/loginbg.png);background-size:20%;background-repeat: repeat;font-family : myFirstFont;">
 <div class="super_container">
 
 
@@ -103,10 +146,10 @@
                                 <div>we build careers</div>
                             </a>
                         </div>
-                        <nav class="main_nav" style="margin-left: 30%">
+                        <nav class="main_nav" style="margin-left: 25%">
                             <ul  class="d-flex flex-row align-items-center justify-content-start ">
-                                <li><a class="text-white mr-0 ml-0" style="font-size: 12px;">صفحه ورود کاربر</a></li>
-                                <li><a href="index.html" style="font-size: 12px;">  < صفحه اصلی</a></li>
+                                <li><a class="text-white mr-0 ml-0" style="font-size: 12px;">گواه نوشت</a></li>
+                                <li><a href="index.html" style="font-size: 12px;" >  < صفحه اصلی</a></li>
                                 <li><a href="index_english.html" class="btn btn-outline-light" href="index.html">EN</a></li>
                                 <li class=" rounded">
                                     <button type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
@@ -145,7 +188,7 @@
                 <li><a href="index_english.html" class="btn btn-outline-light align-content-center" style="width: fit-content;margin-left:37%" >EN</a></li>
 
                 <li><a href="index.html">صفحه اصلی</a></li>
-                <li>
+                <li >
                     <button type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
                     <input class="search-input" name="q" type="text" placeholder="  جست و جو..." value=""   />
                 </li>
@@ -163,17 +206,17 @@
 
 
     <div class="home">
-        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/1.jpg" data-speed="1.2"></div>
+        <div class="parallax_background parallax-window" data-parallax="scroll" id="main_backimg" data-speed="1.2"></div>
         <div class="home_container text-center">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="home_content text-center">
-                            <div style="width: 100%"><div style="width: 50%;margin-top: -30%;margin-bottom: -10%;margin-left: 25%" class="hover09 "> <figure><img width="100%"   src="images/LAST.svg"></figure></div></div>
-                            <div class="home_title"><h1 class="saheltitle hov">موسسه اعزام دانشجو کندو</h1></div>
-                            <div class="home_title"><h1 class="saheltitle hov">دانش آوران سام</h1></div>
+                            <div style="width: 100%"><div style="width: 50%;margin-top: -30%;margin-bottom: -10%;margin-left: 25%" class="hover09 "> <figure><img width="100%" id="main_logo"></figure></div></div>
+                            <div class="home_title"><h1 class="saheltitle hov" id="main_first_line"><!-- fetch here --></h1></div>
+                            <div class="home_title"><h1 class="saheltitle hov" id="main_second_line"><!-- fetch here --></h1></div>
                             <div class="home_text ml-auto mr-auto">
-                                <p class="hov">مهاجرت به استرالیا ، کانادا ، نیوزلند و سایر کشور ها</p>
+                                <p class="hov" id="main_third_line"><!-- fetch here --></p>
                             </div>
                         </div>
                     </div>
@@ -183,25 +226,15 @@
         <div class="scroll_icon hid"></div>
     </div>
 
-
-    <div>
+    <div >
         <div class="container">
-            <div class="m-5 border border-dark bg-white" >
-                <div class="text-dark text-center border-bottom border-dark">
-                    <p style="font-size: 36px; font-weight: bold">ورود</p>
-                </div>
-                <div class="m-5 text-right" style="font-size: 22px;color: black;">
-                    <form method="post" action="">
-                        <div class="form-group">
-                            <label  data-aos="fade-left">نام کاربری</label>
-                            <input data-aos="fade-right" class="form-control border-primary"  type="text" id="username" name="username" placeholder="username">
-                        </div>
-                        <div class="form-group">
-                            <label data-aos="fade-left">رمز</label>
-                            <input data-aos="fade-right" class="form-control border-primary"  type="password" id="password" name="password" placeholder="password">
-                        </div>
-                        <button data-aos="fade-up" type="submit" value="submit" class="btn btn-secondary btn-block" id="login_user" name="login_user">ورود</button>
-                    </form>
+            <div class=" border border-dark bg-white box2" >
+                <div  class=" text-center en  rounded boxt" id="candocertificates">
+                    
+
+                        <!-- fetch here -->
+
+
                 </div>
             </div>
         </div>
@@ -211,18 +244,14 @@
     <footer class="footer" >
         <div class="container" >
             <div class="row text-center" >
-
                 <div class="col-lg-6 ">
                     <div class="footer_logo">
-
-
                         <div class="footer_logo_title">CDS</div>
                         <div class="footer_logo_subtitle">we build careers</div>
                     </div>
-
                 </div>
                 <div class="home_text col-lg-6" style="margin-top: 20px;font-size: 11px">
-                    Design by:
+                    Designed by:
                     <a href="#" class="mt-0">yucatán</a>
                 </div>
 

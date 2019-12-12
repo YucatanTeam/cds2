@@ -595,6 +595,8 @@ section
 {
 	max-width: 875px;
 	margin-top: 14px;
+	color: #fff;
+	font-size: 19.1px;
 }
 .home_text p
 {
@@ -720,6 +722,8 @@ section
 .intro_text
 {
 	margin-top: 32px;
+	margin-bottom: 20px;
+	font-size: 18.5px;
 }
 
 /*********************************

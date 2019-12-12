@@ -1,8 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+
+        // fetch posts
+       fetch('http://cdsapply.ir/posts')
+              .then(response => response.json())
+              .then(posts => {
+                var postsdiv = document.getElementById("posts")
+                for(i = 0; i < posts.length; i++){
+                    if(posts[i].newsletter){
+                        var divRow = document.createElement("div")
+                        divRow.classList.add("row")
+                        var divColLg10 = document.createElement("div")
+                        divColLg10.classList.add("col-lg-10")
+                        var divTextRight = document.createElement("div")
+                        divTextRight.classList.add("text-right", "mt-1")
+                        postsdiv.appendChild(divTextRight)
+                        divTextRight.appendChild(divRow)
+                        var divColLg2 = document.createElement("div")
+                        divColLg2.setAttribute("data-aos", "fade-up")
+                        divColLg2.classList.add("col-lg-2")                
+                        var h4 = document.createElement("h4")
+                        divColLg10.appendChild(h4)
+                        h4.setAttribute("data-aos", "fade-up")
+                        var aTitle = document.createElement("a")
+                        h4.appendChild(aTitle)
+                        var link = document.createTextNode(posts[i].title)
+                        aTitle.appendChild(link)
+                        aTitle.href = "#" // TODO add slug of the post
+                        var p = document.createElement("p")
+                        divColLg10.appendChild(p)
+                        p.setAttribute("data-aos", "fade-up")
+                        var content = document.createTextNode(posts[i].content)
+                        p.appendChild(content)
+                        divRow.appendChild(divColLg10)
+                        divRow.appendChild(divColLg2)
+                        var aImg = document.createElement("a")
+                        divColLg2.appendChild(aImg)
+                        aImg.href = "#" // TODO add slug of the post
+                        var img = document.createElement("img")
+                        img.setAttribute("style", "width: 100%")
+                        img.setAttribute("src", "http://cdsapply.ir"+posts[i].logo.url)
+                        aImg.appendChild(img)                        
+                    }
+
+                }
+              })
+              .catch(error => {
+                    // loading gif ...
+               })
+
+
+
+        // fetch article list
+        fetch('http://cdsapply.ir/bestofs')
+              .then(response => response.json())
+              .then(articles => {
+                var articlesUl = document.getElementById("articles")
+                for(i = 0; i < articles.length; i++){
+                    var br = document.createElement("br")
+                    var li = document.createElement("li")
+                    var articleLink = document.createElement("a")
+                    articleLink.classList.add("btn", "btn-outline-dark", "mt-2", "mr-4")
+                    articleLink.setAttribute("data-aos", "fade-right")
+                    articleLink.setAttribute("data-aos-duration", "500")
+                    articleLink.href = articles[i].link
+                    var title = document.createTextNode(articles[i].title)
+                    articleLink.appendChild(title)
+                    articlesUl.appendChild(articleLink)
+                    articlesUl.appendChild(br)
+                }
+              })
+              .catch(error => {
+                    // loading gif ...
+               })
+
+        // fetch cando services
+        fetch('http://cdsapply.ir/candoservices')
+            .then(response => response.json())
+            .then(services => {
+                document.getElementById("cs_en_title").appendChild(document.createTextNode(services[0].left_text_title))
+                document.getElementById("cs_title").appendChild(document.createTextNode(services[0].title))
+                document.getElementById("cs_body_text").appendChild(document.createTextNode(services[0].body_text))
+                document.getElementById("cs_btn_text").appendChild(document.createTextNode(services[0].btn_text))
+                var cs_backimg_1 = document.createElement("img")
+                var cs_backimg_2 = document.createElement("img")
+                cs_backimg_1.setAttribute("src", "http://cdsapply.ir"+services[0].background_img_1.url)
+                cs_backimg_2.setAttribute("src", "http://cdsapply.ir"+services[0].background_img_2.url)
+                cs_backimg_1.setAttribute("alt", "https://unsplash.com/@fabmag")
+                cs_backimg_2.setAttribute("alt", "https://unsplash.com/@fabmag")
+                document.getElementById("cs_backimg1").appendChild(cs_backimg_1)
+                document.getElementById("cs_backimg2").appendChild(cs_backimg_2)
+
+            })
+            .catch(error => {
+                // loading gif ...
+            })
+
+
+
+        // fetch mainpagemiddletext
+        fetch('http://cdsapply.ir/mainpagemiddledescs')
+            .then(response => response.json())
+            .then(descriptions => {
+                document.getElementById("main_description").appendChild(document.createTextNode(descriptions[0].mainDescription))
+                document.getElementById("right_description").appendChild(document.createTextNode(descriptions[0].rightDescription))
+                var cds_logo = document.createElement("img")
+                document.getElementById("cds_logo").setAttribute("src", "http://cdsapply.ir"+descriptions[0].logo.url)
+                document.getElementById("middle_page_back_img").setAttribute("style", "background-image: url(http://cdsapply.ir"+descriptions[0].background_img.url+")!important;")
+
+            })
+            .catch(error => {
+                // loading gif ...
+            })
+
+
+        // fetch guidances
+        fetch('http://cdsapply.ir/guidances')
+            .then(response => response.json())
+            .then(guidances => {
+
+                document.getElementById("g_en_title").appendChild(document.createTextNode(guidances[0].left_text_title))
+                document.getElementById("g_title").appendChild(document.createTextNode(guidances[0].title))
+                document.getElementById("g_body_text").appendChild(document.createTextNode(guidances[0].body_text))
+                document.getElementById("g_btn_text").appendChild(document.createTextNode(guidances[0].btn_text))
+                document.getElementById("g_backimg").setAttribute("src", "http://cdsapply.ir"+guidances[0].background_img.url)
+                document.getElementById("g_backimg_").style.backgroundImage = "url("+"http://cdsapply.ir"+guidances[0].background_img.url+")";
+
+            })
+            .catch(error => {
+                // loading gif
+            })
+
+
+
+        // fetch footers
+        fetch('http://cdsapply.ir/footers')
+            .then(response => response.json())
+            .then(footers => {
+
+        document.getElementById("footer_cds_name").appendChild(document.createTextNode(footers[0].cds_name))
+        document.getElementById("footer_middle_title").appendChild(document.createTextNode(footers[0].middle_title))
+        document.getElementById("contact_btn").appendChild(document.createTextNode(footers[0].contact_btn))
+        document.getElementById("footer_middle_text").appendChild(document.createTextNode(footers[0].middle_text))
+        document.getElementById("footer_right_text").appendChild(document.createTextNode(footers[0].right_text))
+        document.getElementById("footer_backimg").setAttribute("data-image-src", "http://cdsapply.ir"+footers[0].background_img.url)
+            })
+            .catch(error => {
+                // loading gif
+            })
+
+
+        // fetch social media
+        fetch('http://cdsapply.ir/socialmedias')
+            .then(response => response.json())
+            .then(socialmedias => {
+                var socialmedia = document.getElementById("social_media")
+                for(i = 0; i < socialmedias.length; i++){
+                    var link = document.createElement("a")
+                    link.href = socialmedias[i].link
+                    link.setAttribute("style", "margin-left: 3px;")
+                    var socialmediaIMG = document.createElement("img")
+                    socialmediaIMG.setAttribute("src", "http://cdsapply.ir"+socialmedias[i].logo.url)
+                    link.appendChild(socialmediaIMG)
+                    socialmedia.appendChild(link)
+
+                }
+            })
+
+
+        // fetch header
+        fetch('http://cdsapply.ir/headers')
+            .then(response => response.json())
+            .then(headers => {
+
+                document.getElementById("main_logo").setAttribute("src", "http://cdsapply.ir"+headers[0].logo.url)
+                document.getElementById("main_backimg").setAttribute("data-image-src", "http://cdsapply.ir"+headers[0].background_img.url)
+                document.getElementById("main_first_line").appendChild(document.createTextNode(headers[0].first_line))
+                document.getElementById("main_second_line").appendChild(document.createTextNode(headers[0].second_line))
+                document.getElementById("main_third_line").appendChild(document.createTextNode(headers[0].third_line))
+            })
+
+        // fetch yellow headers
+        fetch('http://cdsapply.ir/yellowheaders')
+            .then(response => response.json())
+            .then(yellowheaders => {
+
+                document.getElementById("yh_immigration_en").appendChild(document.createTextNode(yellowheaders[0].en_name))
+                document.getElementById("yh_immigration").appendChild(document.createTextNode(yellowheaders[0].name))
+                document.getElementById("yh_immigration_back_img").setAttribute("data-image-src", "http://cdsapply.ir"+yellowheaders[0].background_img.url)
+
+                document.getElementById("yh_lc_en").appendChild(document.createTextNode(yellowheaders[1].en_name))
+                document.getElementById("yh_lc").appendChild(document.createTextNode(yellowheaders[1].name))
+                document.getElementById("yh_lc_back_img").setAttribute("data-image-src", "http://cdsapply.ir"+yellowheaders[1].background_img.url)
+            })
+
+        // fetch countries
+        fetch('http://cdsapply.ir/countries')
+            .then(response => response.json())
+            .then(countries => {
+                
+                var countries_first_card = document.getElementById("countries_first_card")
+                var countries_second_card = document.getElementById("countries_second_card")
+                var countries_third_card = document.getElementById("countries_third_card")
+                var main_counties = {}
+
+                for(i = 0; i < countries.length; i++){
+                    
+                        var fdiv = document.createElement("div")
+                        fdiv.classList.add("carousel-item")
+                        var clink = document.createElement("a")
+                        var cimg = document.createElement("img")
+                        var secdiv = document.createElement("div")
+                        clink.href = "http://cdsapply.ir/"+countries[i].slug
+                        cimg.setAttribute("style", "width: 100%;padding: 5px")
+                        cimg.classList.add("d-block", "img-fluid", "rounded")                        
+                        cimg.setAttribute("src", "http://cdsapply.ir"+countries[i].logo.url)
+                        secdiv.classList.add("card-title", "text-center", "saheltitle")
+                        secdiv.appendChild(document.createTextNode(countries[i].name))
+                        clink.appendChild(cimg)
+                        clink.appendChild(secdiv)
+                        fdiv.appendChild(clink)
+
+                    if(countries[i].main && Object.keys(main_counties).length <=3 ) main_counties[countries[i].id] = countries[i]
+                    if(countries[i].first_card_other_country) countries_first_card.appendChild(fdiv)
+                    if(countries[i].second_card_other_country) countries_second_card.appendChild(fdiv)
+                    if(countries[i].third_card_other_country) countries_third_card.appendChild(fdiv)
+                }
+
+
+                if ( $('#countries_first_card').children().length <= 0 ) {
+                    $('#first_arroc_left').hide()
+                    $('#first_arroc_right').hide()
+                } else countries_first_card.firstChild.nextSibling.nextElementSibling.classList.add("active")
+
+                if ( $('#countries_second_card').children().length <= 0 ) {
+                    $('#second_arroc_left').hide()
+                    $('#second_arroc_right').hide()
+                } else countries_second_card.firstChild.nextSibling.nextElementSibling.classList.add("active")
+
+                if ( $('#countries_third_card').children().length <= 0 ) {
+                    $('#third_arroc_left').hide()
+                    $('#third_arroc_right').hide()
+                } else countries_third_card.firstChild.nextSibling.nextElementSibling.classList.add("active")
+
+
+                // TODO : fix slug issue
+                document.getElementById("main_country_n1_back_img").setAttribute("src", "http://cdsapply.ir"+main_counties[1].logo.url)
+                document.getElementById("main_country_n1_en_name").appendChild(document.createTextNode(main_counties[1].en_name))
+                document.getElementById("main_country_n1_name").appendChild(document.createTextNode(main_counties[1].name))
+                document.getElementById("main_country_n1_slug").href = "http://cdsapply.ir/"+main_counties[1].slug
+                document.getElementById("main_country_n1_en_slug").href = "http://cdsapply.ir/"+main_counties[1].en_slug
+
+                document.getElementById("main_country_n2_back_img").setAttribute("src", "http://cdsapply.ir"+main_counties[2].logo.url)
+                document.getElementById("main_country_n2_en_name").appendChild(document.createTextNode(main_counties[2].en_name))
+                document.getElementById("main_country_n2_name").appendChild(document.createTextNode(main_counties[2].name))
+                document.getElementById("main_country_n2_slug").href = "http://cdsapply.ir/"+main_counties[2].slug
+                document.getElementById("main_country_n2_en_slug").href = "http://cdsapply.ir/"+main_counties[2].en_slug
+
+                document.getElementById("main_country_n3_back_img").setAttribute("src", "http://cdsapply.ir"+main_counties[3].logo.url)
+                document.getElementById("main_country_n3_en_name").appendChild(document.createTextNode(main_counties[3].en_name))
+                document.getElementById("main_country_n3_name").appendChild(document.createTextNode(main_counties[3].name))
+                document.getElementById("main_country_n3_slug").href = "http://cdsapply.ir/"+main_counties[3].slug
+                document.getElementById("main_country_n3_en_slug").href = "http://cdsapply.ir/"+main_counties[3].en_slug
+
+            })
+
+
+            // fetch language courses
+            fetch('http://cdsapply.ir/languagecourses')
+                .then(response => response.json())
+                .then(languagecourses => {
+
+                    var first_card_language_courses = document.getElementById("first_card_language_courses")
+                    var second_card_language_courses = document.getElementById("second_card_language_courses")
+                    var third_card_language_courses = document.getElementById("third_card_language_courses")
+                    var fourth_card_language_courses = document.getElementById("fourth_card_language_courses")
+
+                    for(i = 0; i < languagecourses.length; i++){
+
+                        var fdiv = document.createElement("div")
+                        fdiv.classList.add("carousel-item", "pt-4")
+                        
+                        var lglink = document.createElement("a")
+                        lglink.href = "http://cdsapply.ir/"+languagecourses[i].slug
+                        fdiv.appendChild(lglink)
+
+                        var secdiv = document.createElement("div")
+                        secdiv.classList.add("blog_post")
+                        secdiv.setAttribute("data-aos", "fade-up")
+                        secdiv.setAttribute("data-aos-anchor-placement", "bottom-bottom")
+                        var thidiv = document.createElement("div")
+                        thidiv.classList.add("blog_post_image_container")
+                        secdiv.appendChild(thidiv)
+                        lglink.appendChild(secdiv)
+
+                        var fourdiv = document.createElement("div")
+                        fourdiv.classList.add("blog_post_image")
+                        var lgimg = document.createElement("img")
+                        lgimg.setAttribute("src", "http://cdsapply.ir/"+languagecourses[i].logo.url)
+                        fourdiv.appendChild(lgimg)
+                        thidiv.appendChild(fourdiv)
+
+                        var fifthdiv = document.createElement("div")
+                        fifthdiv.classList.add("blog_post_date")
+                        var lglinkencontent = document.createElement("a")
+                        lglinkencontent.href = "http://cdsapply.ir/"+languagecourses[i].en_slug
+                        lglinkencontent.appendChild(document.createTextNode(languagecourses[i].en_name))
+                        fifthdiv.appendChild(lglinkencontent)
+                        thidiv.appendChild(fifthdiv)
+
+                        var sixdiv = document.createElement("div")
+                        sixdiv.classList.add("blog_post_content")
+                        var sevendiv = document.createElement("div")
+                        sevendiv.classList.add("blog_post_title", "text-center")
+                        var lglinkcontent = document.createElement("a")
+                        lglinkcontent.href = "http://cdsapply.ir/"+languagecourses[i].slug
+                        lglinkcontent.setAttribute("style", "font-size: 25px")
+                        lglinkcontent.appendChild(document.createTextNode(languagecourses[i].name))
+                        sevendiv.appendChild(lglinkcontent)
+                        sixdiv.appendChild(sevendiv)
+                        secdiv.appendChild(sixdiv)
+                        fdiv.appendChild(secdiv)
+
+
+                    if(languagecourses[i].first_card_language_courses) first_card_language_courses.appendChild(fdiv)
+                    if(languagecourses[i].second_card_language_courses) second_card_language_courses.appendChild(fdiv)
+                    if(languagecourses[i].third_card_language_courses) third_card_language_courses.appendChild(fdiv)
+                    if(languagecourses[i].fourth_card_language_courses) fourth_card_language_courses.appendChild(fdiv)
+                    
+
+                    }
+
+                if ( $('#third_card_language_courses').children().length <= 0 ) {
+                    $('#third_arrlg_left').hide()
+                    $('#third_arrlg_right').hide()
+                } else third_card_language_courses.firstChild.nextSibling.nextElementSibling.classList.add("active")
+
+                if ( $('#fourth_card_language_courses').children().length <= 0 ) {
+                    $('#fourth_arrlg_left').hide()
+                    $('#fourth_arrlg_right').hide()
+                } else fourth_card_language_courses.firstChild.nextSibling.nextElementSibling.classList.add("active")
+
+                if ( $('#second_card_language_courses').children().length <= 0 ) {
+                    $('#second_arrlg_left').hide()
+                    $('#second_arrlg_right').hide()
+                } else second_card_language_courses.firstChild.nextSibling.nextElementSibling.classList.add("active")             
+                
+
+                if ( $('#first_card_language_courses').children().length <= 0 ) {
+                    $('#first_arrlg_left').hide()
+                    $('#first_arrlg_right').hide()
+                } else first_card_language_courses.firstChild.nextSibling.nextElementSibling.classList.add("active")
+
+
+                })
+
+</script>
 <head>
 
-    <title>کندو</title>
+    <title>Study Abroad Agency | CDS</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Kendu Student Dispatch Institute">
@@ -246,7 +603,7 @@
                 <div class="col">
                     <div class="header_content d-flex flex-row align-items-center justify-content-start textrtl ">
                         <div class="logo">
-                            <a href="#">
+                            <a href="http://cdsapply.ir">
                                 <div class="text-center">CDS</div>
                                 <div>we build careers</div>
                             </a>
@@ -257,7 +614,7 @@
                                 <li><a href="#contactus" style="font-size: 12px;" >Contact US</a></li>
                                 <li><a href="blog.html" style="font-size: 12px;"> Testimonials</a></li>
                                 <li><a href="#wbn" style="font-size: 12px;">IMMIGRATION ADVICE</a></li>
-                                <li><a href="login.html" style="font-size: 12px;">LOG IN</a></li>
+                                <li><a href="hhtp://cdsapply.ir/admin" style="font-size: 12px;">LOG IN</a></li>
                                 <li><a class="btn btn-outline-light" href="index.html" style="font-size: 12px;">FA</a></li>
                                 <li class=" rounded">
                                     <button type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
@@ -306,7 +663,7 @@
 
         </div>
         <div class="menu_reservations_phone ml-auto"><div class="logo">
-            <a href="#">
+            <a href="http://cdsapply.ir">
                 <div>C    D    S</div>
                 <div class="mt-auto">we build careers</div>
             </a>
@@ -352,7 +709,7 @@
                         <div class="intro_text text-left mt-0" >
                             <p >Provide free educational advice on examining qualifications and work records to determine eligibility for admission to universities in the country to provide all academic admission services including tourist visa services for first-degree relatives, student insurance, accommodation or temporary accommodation, action for Student Scholarship (PhD and Master's Degree), submitting applications to multiple universities without increasing contract rates, reviewing applicant's financial records and ensuring their validity, applying for all available scholarships without increasing contract rates, official translation of all required documents, Help in writing a resume, letter n Yz·h school and work certificates and other necessary measures</p>
                         </div>
-                        <div class="button sig_button trans_200 anima mt-0 " style="margin-left: 60%"><a href="services.html">Other Services </a></div>
+                        <div class="button sig_button trans_200 anima mt-0 " style="margin-left: 60%"><a href="cando-services.html">Other Services </a></div>
                     </div>
                     <div class="row hid2 ">
                         <div class="col-xl-4 col-md-6 intro_col ">
@@ -492,9 +849,10 @@
             <div class="intro_title text-center container " data-aos="zoom-in-down"><h2 class="bg-white saheltitle" style="margin-bottom:0"> ــــــــ Other countries ــــــــ</h2></div>
         </div>
 <div class="bg-white row ">
-    <div class="col-lg-4">
-    <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
 
+<!-- ============================================================================================= -->
+    <div class="col-lg-4">
+        <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
         <div class="carousel-inner text-dark font-weight-bold rounded " style="width: 20%;margin-left: 40%;border: dotted 2px black;font-size: 18px; box-shadow: 0px 0px 30px rgba(0,0,0,0.5);"  role="listbox">
             <div class="carousel-item active"><a href="content.html">
                 <img style="width: 100%;padding: 5px " class="d-block img-fluid rounded border-primary" src="images/ch.svg" alt="First slide">
@@ -521,9 +879,9 @@
             <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
+     </div>
     </div>
-
-    </div>
+<!-- ============================================================================================= -->
     <div class="col-lg-4">
         <div id="carouselExampleIndicators2" class="carousel slide my-4" data-ride="carousel">
             <div class="carousel-inner text-dark font-weight-bold rounded " style="width: 20%;margin-left: 40%;border: dotted 2px black;font-size: 18px;box-shadow: 0px 0px 30px rgba(0,0,0,0.5);"  role="listbox">
@@ -553,6 +911,7 @@
             </a>
         </div>
     </div>
+<!-- ============================================================================================= -->
     <div class="col-lg-4">
         <div id="carouselExampleIndicators3" class="carousel slide my-4" data-ride="carousel">
             <div class="carousel-inner text-dark font-weight-bold rounded " style="width: 20%;margin-left: 40% ;border: dotted 2px black;font-size: 18px;box-shadow: 0px 0px 30px rgba(0,0,0,0.5);"  role="listbox">
@@ -583,14 +942,9 @@
             </a>
         </div>
     </div>
+<!-- ============================================================================================= -->
+ </div>
 </div>
-
-
-
-
-
-    </div>
-
 
 
     <div class="bgedited2">
@@ -742,8 +1096,11 @@
                     <div id="carouselExampleIndicators14" class="carousel slide my-4" data-ride="carousel">
 
                         <div class="carousel-inner text-dark font-weight-bold "   role="listbox">
-                            <div class="carousel-item active pt-4"><a href="content.html">
-                                <div class="blog_post" data-aos="fade-up"
+                            
+
+                            <div class="carousel-item active pt-4">
+                                <a href="content.html">
+                                    <div class="blog_post" data-aos="fade-up"
                                      data-aos-anchor-placement="bottom-bottom">
                                     <div class="blog_post_image_container">
                                         <div class="blog_post_image"><img src="images/swiss.jpg" alt="Jackelin Slack"></div>
@@ -755,6 +1112,9 @@
                                     </div>
                                 </div>
                             </a></div>
+
+
+
                             <div class="carousel-item  pt-4"><a href="content.html">
                                 <div class="blog_post" data-aos="fade-up"
                                      data-aos-anchor-placement="bottom-bottom">
@@ -903,7 +1263,7 @@
 
                 </div>
                 <div class="home_text col-lg-6" style="margin-top: 20px;font-size: 11px">
-                    Design by:
+                    Designed by:
                     <a href="#" class="mt-0">yucatán</a>
                 </div>
 

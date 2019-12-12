@@ -1,8 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    // fetch header
+        fetch('http://cdsapply.ir/headers')
+            .then(response => response.json())
+            .then(headers => {
+
+                document.getElementById("main_logo").setAttribute("src", "http://cdsapply.ir"+headers[0].logo.url)
+                document.getElementById("main_backimg").setAttribute("data-image-src", "http://cdsapply.ir"+headers[0].background_img.url)
+                document.getElementById("main_first_line").appendChild(document.createTextNode(headers[0].first_line))
+                document.getElementById("main_second_line").appendChild(document.createTextNode(headers[0].second_line))
+                document.getElementById("main_third_line").appendChild(document.createTextNode(headers[0].third_line))
+            })
+
+
+    // fetch certificates
+        fetch('http://cdsapply.ir/othercandoservices')
+            .then(response => response.json())
+            .then(othercandoservices => {
+
+                var ul = document.getElementById("othercandoservices")
+                for(i = 0; i < othercandoservices.length; i++){
+
+                    var list = document.createElement("li")
+                    list.setAttribute("class", "mt-2")
+                    list.setAttribute("data-aos", "fade-right")
+                    var ocslink = document.createElement("a")
+                    ocslink.href = othercandoservices[i].link
+                    ocslink.setAttribute("class", "text-dark")
+                    ocslink.setAttribute("style", "font-size: 24px; font-weight: bold")
+                    ocslink.appendChild(document.createTextNode(othercandoservices[i].title))
+                    list.appendChild(ocslink)
+                    ul.appendChild(list)
+
+                }
+                
+            })
+</script>
 <head>
 
-    <title>کندو</title>
+    <title>Cando Services | CDS</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="موسسه اعزام دانشجو کندو">
@@ -128,17 +165,17 @@
 
 
     <div class="home">
-        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/1.jpg" data-speed="1.2"></div>
+        <div class="parallax_background parallax-window" data-parallax="scroll" id="main_backimg" data-speed="1.2"></div>
         <div class="home_container text-center">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="home_content text-center">
-                            <div style="width: 100%"><div style="width: 50%;margin-top: -30%;margin-bottom: -10%;margin-left: 25%" class="hover09 "> <figure><img width="100%"   src="images/LAST.svg"></figure></div></div>
-                            <div class="home_title"><h1 class="saheltitle hov">موسسه اعزام دانشجو کندو</h1></div>
-                            <div class="home_title"><h1 class="saheltitle hov">دانش آوران سام</h1></div>
+                            <div style="width: 100%"><div style="width: 50%;margin-top: -30%;margin-bottom: -10%;margin-left: 25%" class="hover09 "> <figure><img width="100%" id="main_logo"></figure></div></div>
+                            <div class="home_title"><h1 class="saheltitle hov" id="main_first_line"><!-- fetch here --></h1></div>
+                            <div class="home_title"><h1 class="saheltitle hov" id="main_second_line"><!-- fetch here --></h1></div>
                             <div class="home_text ml-auto mr-auto">
-                                <p class="hov">مهاجرت به استرالیا ، کانادا ، نیوزلند و سایر کشور ها</p>
+                                <p class="hov" id="main_third_line"><!-- fetch here --></p>
                             </div>
                         </div>
                     </div>
@@ -156,20 +193,10 @@
                     <p style="font-size: 36px; font-weight: bold;color: #FFCD05">سایر خدمات موسسه کندو</p>
                 </div>
                 <div class="text-right p-5">
-                    <ul>
-                        <li class="mt-2" data-aos="fade-right"><a class="text-dark" style="font-size: 24px; font-weight: bold" href="#">فرم قرارداد کندو  ● </a></li>
-                        <li class="mt-2" data-aos="fade-right"><a class="text-dark" style="font-size: 24px; font-weight: bold" href="#">مجوز های وزارت علوم تحقیقات و فناوری  ● </a></li>
-                        <li class="mt-2" data-aos="fade-right"><a class="text-dark" style="font-size: 24px; font-weight: bold" href="#"> موسسات مجاز اعزام دانشجو  ● </a></li>
-                        <li class="mt-2" data-aos="fade-right"><a class="text-dark" style="font-size: 24px; font-weight: bold" href="#"> پذیرش های کندو  ● </a></li>
-                        <li class="mt-2" data-aos="fade-right"><a class="text-dark" style="font-size: 24px; font-weight: bold" href="#"> هزینه های اعزام دانشجو  ● </a></li>
-                        <li class="mt-2" data-aos="fade-right"><a class="text-dark" style="font-size: 24px; font-weight: bold" href="#"> نماینده در خارج کشور  ● </a></li>
-                        <li class="mt-2" data-aos="fade-right"><a class="text-dark" style="font-size: 24px; font-weight: bold" href="#"> ارز دانشجویی  ● </a></li>
-                        <li class="mt-2" data-aos="fade-right"><a class="text-dark" style="font-size: 24px; font-weight: bold" href="#"> تعرفه خدمات اعزام دانشجو  ● </a></li>
-                        <li class="mt-2" data-aos="fade-right"><a class="text-dark" style="font-size: 24px; font-weight: bold" href="#"> شماره حساب های کندو  ● </a></li>
-                        <li class="mt-2" data-aos="fade-right"><a class="text-dark" style="font-size: 24px; font-weight: bold" href="#"> سمینار های CDS  ● </a></li>
-                        <li class="mt-2" data-aos="fade-right"><a class="text-dark" style="font-size: 24px; font-weight: bold" href="#"> فرم ارزیابی و ثبت نام کندو  ● </a></li>
-                        <li class="mt-2" data-aos="fade-right"><a class="text-dark" style="font-size: 24px; font-weight: bold" href="#"> SOP نگارش   ● </a></li>
-                        <li class="mt-2" data-aos="fade-right"><a class="text-dark" style="font-size: 24px; font-weight: bold" href="#"> نگارش رزومه   ● </a></li>
+                    <ul id="othercandoservices">
+                      
+
+                      <!-- fetcch here -->
 
 
 
@@ -196,7 +223,7 @@
 
                 </div>
                 <div class="home_text col-lg-6">
-                    <p>Design by:</p>
+                    <p>Designed by:</p>
                     <a href="#" class="mt-0">yucatán</a>
                 </div>
 

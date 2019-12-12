@@ -1,8 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    // fetch header
+        fetch('http://cdsapply.ir/headers')
+            .then(response => response.json())
+            .then(headers => {
+
+                document.getElementById("main_logo").setAttribute("src", "http://cdsapply.ir"+headers[0].logo.url)
+                document.getElementById("main_backimg").setAttribute("data-image-src", "http://cdsapply.ir"+headers[0].background_img.url)
+                document.getElementById("main_first_line").appendChild(document.createTextNode(headers[0].first_line))
+                document.getElementById("main_second_line").appendChild(document.createTextNode(headers[0].second_line))
+                document.getElementById("main_third_line").appendChild(document.createTextNode(headers[0].third_line))
+            })
+</script>
 <head>
 
-    <title>کندو</title>
+    <title>Consultation Form | CDS</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="موسسه اعزام دانشجو کندو">
@@ -157,25 +170,28 @@
 
 
     <div class="home">
-        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/1.jpg" data-speed="1.2"></div>
+        <div class="parallax_background parallax-window" data-parallax="scroll" id="main_backimg" data-speed="1.2"></div>
         <div class="home_container text-center">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="home_content text-center">
-                            <div style="width: 100%"><div style="width: 50%;margin-top: -30%;margin-bottom: -10%;margin-left: 25%" class="hover09 "> <figure><img width="100%"   src="images/LAST.svg"></figure></div></div>
-                            <div class="home_title"><h1 class="saheltitle hov">موسسه اعزام دانشجو کندو</h1></div>
-                            <div class="home_title"><h1 class="saheltitle hov">دانش آوران سام</h1></div>
+                            <div style="width: 100%"><div style="width: 50%;margin-top: -30%;margin-bottom: -10%;margin-left: 25%" class="hover09 "> <figure><img width="100%" id="main_logo"></figure></div></div>
+                            <div class="home_title"><h1 class="saheltitle hov" id="main_first_line"><!-- fetch here --></h1></div>
+                            <div class="home_title"><h1 class="saheltitle hov" id="main_second_line"><!-- fetch here --></h1></div>
                             <div class="home_text ml-auto mr-auto">
-                                <p class="hov">مهاجرت به استرالیا ، کانادا ، نیوزلند و سایر کشور ها</p>
+                                <p class="hov" id="main_third_line"><!-- fetch here --></p>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="scroll_icon"></div>
+        <div class="scroll_icon hid"></div>
     </div>
+
 
 
     <div>
@@ -744,7 +760,7 @@
 
                 </div>
                 <div class="home_text col-lg-6" style="margin-top: 20px;font-size: 11px">
-                    Design by:
+                    Designed by:
                     <a href="#" class="mt-0">yucatán</a>
                 </div>
 

@@ -1,8 +1,365 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
+<script>
+
+        // fetch posts
+       fetch('http://cdsapply.ir/posts')
+              .then(response => response.json())
+              .then(posts => {
+                var postsdiv = document.getElementById("posts")
+                for(i = 0; i < posts.length; i++){
+                    if(posts[i].newsletter){
+                        var divRow = document.createElement("div")
+                        divRow.classList.add("row")
+                        var divColLg10 = document.createElement("div")
+                        divColLg10.classList.add("col-lg-10")
+                        var divTextRight = document.createElement("div")
+                        divTextRight.classList.add("text-right", "mt-1")
+                        postsdiv.appendChild(divTextRight)
+                        divTextRight.appendChild(divRow)
+                        var divColLg2 = document.createElement("div")
+                        divColLg2.setAttribute("data-aos", "fade-up")
+                        divColLg2.classList.add("col-lg-2")                
+                        var h4 = document.createElement("h4")
+                        divColLg10.appendChild(h4)
+                        h4.setAttribute("data-aos", "fade-up")
+                        var aTitle = document.createElement("a")
+                        h4.appendChild(aTitle)
+                        var link = document.createTextNode(posts[i].title)
+                        aTitle.appendChild(link)
+                        aTitle.href = "http://cdsapply.ir/"+posts[i].slug // TODO add slug of the post
+                        var p = document.createElement("p")
+                        divColLg10.appendChild(p)
+                        p.setAttribute("data-aos", "fade-up")
+                        var content = document.createTextNode('... '+posts[i].content.slice(0,80))
+                        p.appendChild(content)
+                        divRow.appendChild(divColLg10)
+                        divRow.appendChild(divColLg2)
+                        var aImg = document.createElement("a")
+                        divColLg2.appendChild(aImg)
+                        aImg.href = "http://cdsapply.ir/"+posts[i].slug // TODO add slug of the post
+                        var img = document.createElement("img")
+                        img.setAttribute("style", "width: 100%")
+                        img.setAttribute("src", "http://cdsapply.ir"+posts[i].logo.url)
+                        aImg.appendChild(img)                        
+                    }
+
+                }
+              })
+              .catch(error => {
+                    // loading gif ...
+               })
+
+
+
+        // fetch article list
+        fetch('http://cdsapply.ir/bestofs')
+              .then(response => response.json())
+              .then(articles => {
+                var articlesUl = document.getElementById("articles")
+                for(i = 0; i < articles.length; i++){
+                    var br = document.createElement("br")
+                    var li = document.createElement("li")
+                    var articleLink = document.createElement("a")
+                    articleLink.classList.add("btn", "btn-outline-dark", "mt-2", "mr-4")
+                    articleLink.setAttribute("data-aos", "fade-right")
+                    articleLink.setAttribute("data-aos-duration", "500")
+                    articleLink.href = articles[i].link
+                    var title = document.createTextNode(articles[i].title)
+                    articleLink.appendChild(title)
+                    articlesUl.appendChild(articleLink)
+                    articlesUl.appendChild(br)
+                }
+              })
+              .catch(error => {
+                    // loading gif ...
+               })
+
+        // fetch cando services
+        fetch('http://cdsapply.ir/candoservices')
+            .then(response => response.json())
+            .then(services => {
+                document.getElementById("cs_en_title").appendChild(document.createTextNode(services[0].left_text_title))
+                document.getElementById("cs_title").appendChild(document.createTextNode(services[0].title))
+                document.getElementById("cs_body_text").appendChild(document.createTextNode(services[0].body_text))
+                document.getElementById("cs_btn_text").appendChild(document.createTextNode(services[0].btn_text))
+                var cs_backimg_1 = document.createElement("img")
+                var cs_backimg_2 = document.createElement("img")
+                cs_backimg_1.setAttribute("src", "http://cdsapply.ir"+services[0].background_img_1.url)
+                cs_backimg_2.setAttribute("src", "http://cdsapply.ir"+services[0].background_img_2.url)
+                cs_backimg_1.setAttribute("alt", "https://unsplash.com/@fabmag")
+                cs_backimg_2.setAttribute("alt", "https://unsplash.com/@fabmag")
+                document.getElementById("cs_backimg1").appendChild(cs_backimg_1)
+                document.getElementById("cs_backimg2").appendChild(cs_backimg_2)
+
+            })
+            .catch(error => {
+                // loading gif ...
+            })
+
+
+
+        // fetch mainpagemiddletext
+        fetch('http://cdsapply.ir/mainpagemiddledescs')
+            .then(response => response.json())
+            .then(descriptions => {
+                document.getElementById("main_description").appendChild(document.createTextNode(descriptions[0].mainDescription))
+                document.getElementById("right_description").appendChild(document.createTextNode(descriptions[0].rightDescription))
+                var cds_logo = document.createElement("img")
+                document.getElementById("cds_logo").setAttribute("src", "http://cdsapply.ir"+descriptions[0].logo.url)
+                document.getElementById("middle_page_back_img").setAttribute("style", "background-image: url(http://cdsapply.ir"+descriptions[0].background_img.url+")!important;")
+
+            })
+            .catch(error => {
+                // loading gif ...
+            })
+
+
+        // fetch guidances
+        fetch('http://cdsapply.ir/guidances')
+            .then(response => response.json())
+            .then(guidances => {
+
+                document.getElementById("g_en_title").appendChild(document.createTextNode(guidances[0].left_text_title))
+                document.getElementById("g_title").appendChild(document.createTextNode(guidances[0].title))
+                document.getElementById("g_body_text").appendChild(document.createTextNode(guidances[0].body_text))
+                document.getElementById("g_btn_text").appendChild(document.createTextNode(guidances[0].btn_text))
+                document.getElementById("g_backimg").setAttribute("src", "http://cdsapply.ir"+guidances[0].background_img.url)
+                document.getElementById("g_backimg_").style.backgroundImage = "url("+"http://cdsapply.ir"+guidances[0].background_img.url+")";
+
+            })
+            .catch(error => {
+                // loading gif
+            })
+
+
+
+        // fetch footers
+        fetch('http://cdsapply.ir/footers')
+            .then(response => response.json())
+            .then(footers => {
+
+        document.getElementById("footer_cds_name").appendChild(document.createTextNode(footers[0].cds_name))
+        document.getElementById("footer_middle_title").appendChild(document.createTextNode(footers[0].middle_title))
+        document.getElementById("contact_btn").appendChild(document.createTextNode(footers[0].contact_btn))
+        document.getElementById("footer_middle_text").appendChild(document.createTextNode(footers[0].middle_text))
+        document.getElementById("footer_right_text").appendChild(document.createTextNode(footers[0].right_text))
+        document.getElementById("footer_backimg").setAttribute("data-image-src", "http://cdsapply.ir"+footers[0].background_img.url)
+            })
+            .catch(error => {
+                // loading gif
+            })
+
+
+        // fetch social media
+        fetch('http://cdsapply.ir/socialmedias')
+            .then(response => response.json())
+            .then(socialmedias => {
+                var socialmedia = document.getElementById("social_media")
+                for(i = 0; i < socialmedias.length; i++){
+                    var link = document.createElement("a")
+                    link.href = socialmedias[i].link
+                    link.setAttribute("style", "margin-left: 3px;")
+                    var socialmediaIMG = document.createElement("img")
+                    socialmediaIMG.setAttribute("src", "http://cdsapply.ir"+socialmedias[i].logo.url)
+                    link.appendChild(socialmediaIMG)
+                    socialmedia.appendChild(link)
+
+                }
+            })
+
+
+        // fetch header
+        fetch('http://cdsapply.ir/headers')
+            .then(response => response.json())
+            .then(headers => {
+
+                document.getElementById("main_logo").setAttribute("src", "http://cdsapply.ir"+headers[0].logo.url)
+                document.getElementById("main_backimg").setAttribute("data-image-src", "http://cdsapply.ir"+headers[0].background_img.url)
+                document.getElementById("main_first_line").appendChild(document.createTextNode(headers[0].first_line))
+                document.getElementById("main_second_line").appendChild(document.createTextNode(headers[0].second_line))
+                document.getElementById("main_third_line").appendChild(document.createTextNode(headers[0].third_line))
+            })
+
+        // fetch yellow headers
+        fetch('http://cdsapply.ir/yellowheaders')
+            .then(response => response.json())
+            .then(yellowheaders => {
+
+                document.getElementById("yh_immigration_en").appendChild(document.createTextNode(yellowheaders[0].en_name))
+                document.getElementById("yh_immigration").appendChild(document.createTextNode(yellowheaders[0].name))
+                document.getElementById("yh_immigration_back_img").setAttribute("data-image-src", "http://cdsapply.ir"+yellowheaders[0].background_img.url)
+
+                document.getElementById("yh_lc_en").appendChild(document.createTextNode(yellowheaders[1].en_name))
+                document.getElementById("yh_lc").appendChild(document.createTextNode(yellowheaders[1].name))
+                document.getElementById("yh_lc_back_img").setAttribute("data-image-src", "http://cdsapply.ir"+yellowheaders[1].background_img.url)
+            })
+
+        // fetch countries
+        fetch('http://cdsapply.ir/countries')
+            .then(response => response.json())
+            .then(countries => {
+                
+                var countries_first_card = document.getElementById("countries_first_card")
+                var countries_second_card = document.getElementById("countries_second_card")
+                var countries_third_card = document.getElementById("countries_third_card")
+                var main_counties = {}
+
+                for(i = 0; i < countries.length; i++){
+                    
+                        var fdiv = document.createElement("div")
+                        fdiv.classList.add("carousel-item")
+                        var clink = document.createElement("a")
+                        var cimg = document.createElement("img")
+                        var secdiv = document.createElement("div")
+                        clink.href = "http://cdsapply.ir/"+countries[i].slug // TODO : fix slug issue
+                        cimg.setAttribute("style", "width: 100%;padding: 5px")
+                        cimg.classList.add("d-block", "img-fluid", "rounded")                        
+                        cimg.setAttribute("src", "http://cdsapply.ir"+countries[i].logo.url) // TODO : fix slug issue
+                        secdiv.classList.add("card-title", "text-center", "saheltitle")
+                        secdiv.appendChild(document.createTextNode(countries[i].name))
+                        clink.appendChild(cimg)
+                        clink.appendChild(secdiv)
+                        fdiv.appendChild(clink)
+
+                    if(countries[i].main && Object.keys(main_counties).length <=3 ) main_counties[countries[i].id] = countries[i]
+                    if(countries[i].first_card_other_country) countries_first_card.appendChild(fdiv)
+                    if(countries[i].second_card_other_country) countries_second_card.appendChild(fdiv)
+                    if(countries[i].third_card_other_country) countries_third_card.appendChild(fdiv)
+                }
+
+
+                if ( $('#countries_first_card').children().length <= 0 ) {
+                    $('#first_arroc_left').hide()
+                    $('#first_arroc_right').hide()
+                } else countries_first_card.firstChild.nextSibling.nextElementSibling.classList.add("active")
+
+                if ( $('#countries_second_card').children().length <= 0 ) {
+                    $('#second_arroc_left').hide()
+                    $('#second_arroc_right').hide()
+                } else countries_second_card.firstChild.nextSibling.nextElementSibling.classList.add("active")
+
+                if ( $('#countries_third_card').children().length <= 0 ) {
+                    $('#third_arroc_left').hide()
+                    $('#third_arroc_right').hide()
+                } else countries_third_card.firstChild.nextSibling.nextElementSibling.classList.add("active")
+
+
+                // TODO : fix slug issue
+                document.getElementById("main_country_n1_back_img").setAttribute("src", "http://cdsapply.ir"+main_counties[1].logo.url)
+                document.getElementById("main_country_n1_en_name").appendChild(document.createTextNode(main_counties[1].en_name))
+                document.getElementById("main_country_n1_name").appendChild(document.createTextNode(main_counties[1].name))
+                document.getElementById("main_country_n1_slug").href = "http://cdsapply.ir/"+main_counties[1].slug
+                document.getElementById("main_country_n1_en_slug").href = "http://cdsapply.ir/"+main_counties[1].en_slug
+
+                document.getElementById("main_country_n2_back_img").setAttribute("src", "http://cdsapply.ir"+main_counties[2].logo.url)
+                document.getElementById("main_country_n2_en_name").appendChild(document.createTextNode(main_counties[2].en_name))
+                document.getElementById("main_country_n2_name").appendChild(document.createTextNode(main_counties[2].name))
+                document.getElementById("main_country_n2_slug").href = "http://cdsapply.ir/"+main_counties[2].slug
+                document.getElementById("main_country_n2_en_slug").href = "http://cdsapply.ir/"+main_counties[2].en_slug
+
+                document.getElementById("main_country_n3_back_img").setAttribute("src", "http://cdsapply.ir"+main_counties[3].logo.url)
+                document.getElementById("main_country_n3_en_name").appendChild(document.createTextNode(main_counties[3].en_name))
+                document.getElementById("main_country_n3_name").appendChild(document.createTextNode(main_counties[3].name))
+                document.getElementById("main_country_n3_slug").href = "http://cdsapply.ir/"+main_counties[3].slug
+                document.getElementById("main_country_n3_en_slug").href = "http://cdsapply.ir/"+main_counties[3].en_slug
+
+            })
+
+
+            // fetch language courses
+            fetch('http://cdsapply.ir/languagecourses')
+                .then(response => response.json())
+                .then(languagecourses => {
+
+                    var first_card_language_courses = document.getElementById("first_card_language_courses")
+                    var second_card_language_courses = document.getElementById("second_card_language_courses")
+                    var third_card_language_courses = document.getElementById("third_card_language_courses")
+                    var fourth_card_language_courses = document.getElementById("fourth_card_language_courses")
+
+                    for(i = 0; i < languagecourses.length; i++){
+
+                        var fdiv = document.createElement("div")
+                        fdiv.classList.add("carousel-item", "pt-4")
+                        
+                        var lglink = document.createElement("a")
+                        lglink.href = "http://cdsapply.ir/"+languagecourses[i].slug // TODO : fix slug issue
+                        fdiv.appendChild(lglink)
+
+                        var secdiv = document.createElement("div")
+                        secdiv.classList.add("blog_post")
+                        secdiv.setAttribute("data-aos", "fade-up")
+                        secdiv.setAttribute("data-aos-anchor-placement", "bottom-bottom")
+                        var thidiv = document.createElement("div")
+                        thidiv.classList.add("blog_post_image_container")
+                        secdiv.appendChild(thidiv)
+                        lglink.appendChild(secdiv)
+
+                        var fourdiv = document.createElement("div")
+                        fourdiv.classList.add("blog_post_image")
+                        var lgimg = document.createElement("img")
+                        lgimg.setAttribute("src", "http://cdsapply.ir/"+languagecourses[i].logo.url)
+                        fourdiv.appendChild(lgimg)
+                        thidiv.appendChild(fourdiv)
+
+                        var fifthdiv = document.createElement("div")
+                        fifthdiv.classList.add("blog_post_date")
+                        var lglinkencontent = document.createElement("a")
+                        lglinkencontent.href = "http://cdsapply.ir/"+languagecourses[i].en_slug // TODO : fix slug issue
+                        lglinkencontent.appendChild(document.createTextNode(languagecourses[i].en_name))
+                        fifthdiv.appendChild(lglinkencontent)
+                        thidiv.appendChild(fifthdiv)
+
+                        var sixdiv = document.createElement("div")
+                        sixdiv.classList.add("blog_post_content")
+                        var sevendiv = document.createElement("div")
+                        sevendiv.classList.add("blog_post_title", "text-center")
+                        var lglinkcontent = document.createElement("a")
+                        lglinkcontent.href = "http://cdsapply.ir/"+languagecourses[i].slug // TODO : fix slug issue
+                        lglinkcontent.setAttribute("style", "font-size: 25px")
+                        lglinkcontent.appendChild(document.createTextNode(languagecourses[i].name))
+                        sevendiv.appendChild(lglinkcontent)
+                        sixdiv.appendChild(sevendiv)
+                        secdiv.appendChild(sixdiv)
+                        fdiv.appendChild(secdiv)
+
+
+                    if(languagecourses[i].first_card_language_courses) first_card_language_courses.appendChild(fdiv)
+                    if(languagecourses[i].second_card_language_courses) second_card_language_courses.appendChild(fdiv)
+                    if(languagecourses[i].third_card_language_courses) third_card_language_courses.appendChild(fdiv)
+                    if(languagecourses[i].fourth_card_language_courses) fourth_card_language_courses.appendChild(fdiv)
+                    
+
+                    }
+
+                if ( $('#third_card_language_courses').children().length <= 0 ) {
+                    $('#third_arrlg_left').hide()
+                    $('#third_arrlg_right').hide()
+                } else third_card_language_courses.firstChild.nextSibling.nextElementSibling.classList.add("active")
+
+                if ( $('#fourth_card_language_courses').children().length <= 0 ) {
+                    $('#fourth_arrlg_left').hide()
+                    $('#fourth_arrlg_right').hide()
+                } else fourth_card_language_courses.firstChild.nextSibling.nextElementSibling.classList.add("active")
+
+                if ( $('#second_card_language_courses').children().length <= 0 ) {
+                    $('#second_arrlg_left').hide()
+                    $('#second_arrlg_right').hide()
+                } else second_card_language_courses.firstChild.nextSibling.nextElementSibling.classList.add("active")             
+                
+
+                if ( $('#first_card_language_courses').children().length <= 0 ) {
+                    $('#first_arrlg_left').hide()
+                    $('#first_arrlg_right').hide()
+                } else first_card_language_courses.firstChild.nextSibling.nextElementSibling.classList.add("active")
+
+
+                })
+
+</script>
 <head>
 
-    <title>کندو</title>
+    <title>موسسه اعزام دانشجو | CDS</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="موسسه اعزام دانشجو کندو">
@@ -223,7 +580,7 @@
     @media screen and (max-width:1500px) {
         .bgedited2 {
 
-            background-image: url(images/language3-2.jpg);
+            /*background-image: url(images/language3-2.jpg);*/
             background-size: cover;
         }
     }
@@ -272,7 +629,7 @@
                 <div class="col">
                     <div class="header_content d-flex flex-row align-items-center justify-content-start textrtl ">
                         <div class="logo">
-                            <a href="#">
+                            <a href="http://cdsapply.ir">
                                 <div>        CDS</div>
                                 <div>we build careers</div>
                             </a>
@@ -281,9 +638,9 @@
                             <ul  class="d-flex flex-row align-items-center justify-content-start ">
 
                                 <li><a href="#contactus" style="font-size: 12px;">تماس با کندو</a></li>
-                                <li><a href="blog.html" style="font-size: 12px;">گواه نوشت</a></li>
+                                <li><a href="cando-certificate.html" style="font-size: 12px;">گواه نوشت</a></li>
                                 <li><a href="#wbn" style="font-size: 12px;">مشاوره مهاجرت</a></li>
-                                <li><a href="login.html" style="font-size: 12px;">ورود</a></li>
+                                <li><a href="hhtp://cdsapply.ir/admin" style="font-size: 12px;">ورود</a></li>
                                 <li><a href="index_english.html" style="font-size: 12px;" class="btn btn-outline-light" href="index.html">EN</a></li>
                                 <li class=" rounded">
                                     <button type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
@@ -321,9 +678,9 @@
             <ul>
                 <li><a href="index_english.html" class="btn btn-outline-light align-content-center" style="width: fit-content;margin-left:37%" >EN</a></li>
 
-                <li><a href="login.html">ورود</a></li>
+                <li><a href="hhtp://cdsapply.ir/admin">ورود</a></li>
                 <li><a href="#contactus" onClick="window.location.reload()">تماس با کندو</a></li>
-                <li><a href="blog.html">گواه نوشت</a></li>
+                <li><a href="cando-certificate.html">گواه نوشت</a></li>
                 <li><a href="#wbn" onClick="window.location.reload()">مشاوره مهاجرت</a></li>
                 <li >
                     <button type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
@@ -333,7 +690,7 @@
 
         </div>
         <div class="menu_reservations_phone ml-auto"><div class="logo">
-            <a href="#">
+            <a href="http://cdsapply.ir">
                 <div>C    D    S</div>
                 <div class="mt-auto">we build careers</div>
             </a>
@@ -343,18 +700,17 @@
 
 
     <div class="home">
-        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/1.jpg" data-speed="1.2"></div>
+        <div class="parallax_background parallax-window" data-parallax="scroll" id="main_backimg" data-speed="1.2"></div>
         <div class="home_container text-center">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="home_content text-center">
-                            <div style="width: 100%"><div style="width: 50%;margin-top: -30%;margin-bottom: -10%;margin-left: 25%" class="hover09 "> <figure><img width="100%"   src="images/LAST.svg"></figure></div></div>
-
-                            <div class="home_title"><h1 class="saheltitle hov ">موسسه اعزام دانشجو کندو</h1></div>
-                            <div class="home_title"><h1 class="saheltitle hov ">دانش آوران سام</h1></div>
+                            <div style="width: 100%"><div style="width: 50%;margin-top: -30%;margin-bottom: -10%;margin-left: 25%" class="hover09 "> <figure><img width="100%" id="main_logo"></figure></div></div>
+                            <div class="home_title"><h1 class="saheltitle hov" id="main_first_line"><!-- fetch here --></h1></div>
+                            <div class="home_title"><h1 class="saheltitle hov" id="main_second_line"><!-- fetch here --></h1></div>
                             <div class="home_text ml-auto mr-auto mb-5">
-                                <p class="hov ">مهاجرت به استرالیا ، کانادا ، نیوزلند و سایر کشور ها</p>
+                                <p class="hov" id="main_third_line"><!-- fetch here --></p>
                             </div>
 
 
@@ -371,91 +727,65 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div class="intro_content" >
-                        <div class="row ">
 
-                            <div class="intro_subtitle page_subtitle col-lg-4 anima ">Our Services</div>
-                            <div class="intro_title text-right col-lg-8 anima "><h2 class="saheltitle ">خدمات کندو</h2></div>
 
-                        </div>
 
-                        <div class="intro_text text-right mt-0" >
-                            <p >ارائه مشاوره ی تحصیلی رایگان برای بررسی مدارک تحصیلی و سوابق کاری جهت تعیین امکان پذیرش از دانشگاه های این کشور تا ارائه تمامی خدمات پذیرش تحصیلی از جمله خدمات ویزای توریستی برای اقوام درجه یک متقاضی ، تهیه بیمه دانشجویی ، رزرو خوابگاه یا اقامتگاه موقت ، اقدام برای بورس دانشجویی(دوره دکترا و کارشناسی ارشد تحقیقاتی) ، ارسال تقاضای پذیرش به چندین دانشگاه بدون افزایش نرخ قرارداد،  بررسی مدارک مالی متقاضی و اطمینان از صحت انها ، اقدام برای تمامی بورس های موجود بدون افزایش نرخ قرارداد ،  ترجمه رسمی کلیه مدارک مورد نیاز، راهنمایی در نگارش رزومه،نامه انگیزه تحصیلی و گواهی کار و سایر اقدامات لازم</p>
-                        </div>
-                        <div class="button sig_button trans_200 anima mt-0"><a href="services.html" >سایر خدمات</a></div>
+                <div class="intro_content" >
+                    <div class="row ">
+
+                        <div class="intro_subtitle page_subtitle col-lg-4 anima" id="cs_en_title"><!-- fetch here --></div>
+                        <div class="intro_title text-right col-lg-8 anima "><h2 class="saheltitle" id="cs_title"><!-- fetch here --></h2></div>
+
                     </div>
-                    <div class="row hid2 ">
-                        <div class="col-xl-4 col-md-6 intro_col ">
-                            <div class="intro_image" data-aos="fade-right" data-aos-duration="3000"><img src="images/ser1.png" alt="https://unsplash.com/@quanle2819"></div>
-                        </div>
-                        <div class="col-xl-4 col-md-6 intro_col ">
-                            <div class="intro_image" data-aos="fade-right"
 
-                                 data-aos-duration="1500"><img src="images/ser2.png" alt="https://unsplash.com/@fabmag"></div>
+                    <div class="intro_text text-right mt-0" id="cs_body_text"><!-- fetch here --></div>
+                    
+                    <div class="button sig_button trans_200 anima mt-0"><a href="cando-services.html" id="cs_btn_text"><!-- fetch here --></a></div>
+                </div>
+                <div class="row hid2 ">
+                    <div class="col-xl-4 col-md-6 intro_col ">
+                        <div class="intro_image" data-aos="fade-right" data-aos-duration="3000" id="cs_backimg1">
+                            <!-- fetch here -->
                         </div>
                     </div>
+                    <div class="col-xl-4 col-md-6 intro_col ">
+                        <div class="intro_image" data-aos="fade-right" data-aos-duration="1500" id="cs_backimg2">
+                            <!-- fetch here -->
+                        </div>
+                    </div>
+                </div>
+
+
+                
+
                 </div>
             </div>
         </div>
     </div>
 
 
-    <!--<div class="home">-->
-        <!--<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/1.jpg" ></div>-->
-        <!--<div class="home_container text-center">-->
-            <!--<div class="container">-->
-                <!--<div class="row">-->
-
-                    <!--<div class="col-lg-8 mt-4 mb-4" >-->
-                        <!--<div class="text-right home_text rounded p-3 parallax-window " data-speed="5" style="background-color: rgb(0, 0, 0,0.4)">-->
-                            <!--<p >موسسه کندو دانش آوران سام از سال 1390 تاکنون با مجوز رسمی از وزارت علوم و تحقیقات و فناوری در سه حوزه کشور های کانادا،استرالیا و نیوزلند فعالیت کرده و به علاقمندان به تحصیل در این کشور ها خدمات دانشجویی ارائه می نماید</p>-->
-                            <!--<p >مشاورین متخصص و با تجربه ی کندو شما را در تمامی مراحل از مشاوره ی ابتدایی در مورد شرایط عمومی تحصیل و زندگی در استرالیا ، نیوزلند و کانادا و کمک به انتخاب رشته تحصیلی با توجه به بازار کار این کشور ها و شرایط اقامتی آنها ، تا اقدام جهت اخذ پذیرش ، بورس و ویزای تحصیلی همراهی خواهند نمود</p>-->
-                            <!--<p>اخذ پذیرش،اقامت و اعزام دانشجو به خارج از مهم ترین اهداف موسسه کندودانش اوران سام میباشد.موسسه کندو دارای مجوز رسمی از وزارت علوم،تحقیقات وفناوری با برخورداری از نمایندگان و مشاوران مجرب دانشگاهی و با سابقه مدیریتی بالا در داخل و خارج از ایران و سابقه چندین ساله در زمینه اخذ پذیرش،اقامت و اعزام دانشجو به خارح از کشور فعالیت خود را آغاز نموده است .اطلاع رسانی درست و دقیق ،مشاوره در زمینه پذیرش تحصیلی کشور های مختلف و اعزام دانشجو به کشور های کانادا ،استرالیا ،نیوزلند و سایر کشور ها از طریق موسسات مجاز همکار در امر اعزام دانشجو به دانشگاه های مورد تایید وزارت علوم، از مهم ترین خدمات کندو است.امید اس که رسالت این موسسه به عنوان یکی برترین موسسات اعزام دانشجو در جهت ارائه بهترین خدمات به متقاضیان گرامی،به خوبی تداوم یافته و در این مسیر شما را تا آخرین مرحله برای ادامه تحصیل،اسکان،اقامت،دوره کالج زبان،ویزای تحصیلی،بورسیه تحصیلی و خدمات متنوع دیگر برای همه ی سنین ور مقاطع مختلف تحصیلی همراهی نمایید</p>-->
-
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="col-lg-4">-->
-
-
-                        <!--<img style="width: 100%;margin-top: -10%;margin-bottom: -10% " src="images/LAST.svg" >-->
-
-                        <!--<div class="text-center home_text rounded p-3" style="background-color: rgb(0, 0, 0,0.4)">-->
-                            <!--<p style="margin-bottom: -0.1%;color: yellow">کندو دانش آوران سام</p>-->
-                            <!--<p style="margin-bottom: -0.1%;color: yellow">موسسه اعزام دانشجو به خارج از کشور</p>-->
-                            <!--<p style="margin-bottom: -0.1%;color: yellow">با مجوز رسمی شماره67386-17-42 از وزارت علوم تحقیقات و فناوری</p>-->
-
-                        <!--</div>-->
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
-    <!--</div>-->
-
-
-
-    <div class="bgedited" >
+    <div class="bgedited" id="middle_page_back_img">
         <div class="container">
 
             <div class="row " >
                 <div class="col-lg-8 mt-4 mb-4">
-                    <div class="text-right home_text rounded p-3" style="background-color: rgb(0, 0, 0,0.4)">
-                        <p>موسسه کندو دانش آوران سام از سال 1390 تاکنون با مجوز رسمی از وزارت علوم و تحقیقات و فناوری در سه حوزه کشور های کانادا،استرالیا و نیوزلند فعالیت کرده و به علاقمندان به تحصیل در این کشور ها خدمات دانشجویی ارائه می نماید</p>
-                        <p >مشاورین متخصص و با تجربه ی کندو شما را در تمامی مراحل از مشاوره ی ابتدایی در مورد شرایط عمومی تحصیل و زندگی در استرالیا ، نیوزلند و کانادا و کمک به انتخاب رشته تحصیلی با توجه به بازار کار این کشور ها و شرایط اقامتی آنها ، تا اقدام جهت اخذ پذیرش ، بورس و ویزای تحصیلی همراهی خواهند نمود</p>
-                        <p>اخذ پذیرش،اقامت و اعزام دانشجو به خارج از مهم ترین اهداف موسسه کندودانش اوران سام میباشد.موسسه کندو دارای مجوز رسمی از وزارت علوم،تحقیقات وفناوری با برخورداری از نمایندگان و مشاوران مجرب دانشگاهی و با سابقه مدیریتی بالا در داخل و خارج از ایران و سابقه چندین ساله در زمینه اخذ پذیرش،اقامت و اعزام دانشجو به خارح از کشور فعالیت خود را آغاز نموده است .اطلاع رسانی درست و دقیق ،مشاوره در زمینه پذیرش تحصیلی کشور های مختلف و اعزام دانشجو به کشور های کانادا ،استرالیا ،نیوزلند و سایر کشور ها از طریق موسسات مجاز همکار در امر اعزام دانشجو به دانشگاه های مورد تایید وزارت علوم، از مهم ترین خدمات کندو است.امید اس که رسالت این موسسه به عنوان یکی برترین موسسات اعزام دانشجو در جهت ارائه بهترین خدمات به متقاضیان گرامی،به خوبی تداوم یافته و در این مسیر شما را تا آخرین مرحله برای ادامه تحصیل،اسکان،اقامت،دوره کالج زبان،ویزای تحصیلی،بورسیه تحصیلی و خدمات متنوع دیگر برای همه ی سنین ور مقاطع مختلف تحصیلی همراهی نمایید</p>
+                    <div class="text-right home_text rounded p-3" style="background-color: rgb(0, 0, 0,0.4)" id="main_description">
+                       
+                        <!-- fetch here -->
 
                     </div>
                 </div>
                 <div class="col-lg-4">
 
 
-                    <img style="width: 100%;margin-top: -10%;margin-bottom: -10% " src="images/LAST.svg" >
+                    <img style="width: 100%;margin-top: -10%;margin-bottom: -10% " id="cds_logo">
 
                     <div class="text-center home_text rounded p-3" style="background-color: rgb(0, 0, 0,0.4)">
-                        <p style="margin-bottom: -0.1%;color: yellow">کندو دانش آوران سام</p>
-                        <p style="margin-bottom: -0.1%;color: yellow">موسسه اعزام دانشجو به خارج از کشور</p>
-                        <p style="margin-bottom: -0.1%;color: yellow">با مجوز رسمی شماره 67386-17-42 از وزارت علوم تحقیقات و فناوری</p>
+                        <div style="margin-bottom: -0.1%;color: yellow" id="right_description">
+
+                            <!-- fetch here -->
+                        
+                        </div>
 
                     </div>
 
@@ -472,13 +802,22 @@
                 <div class="row">
                     <div class="col-lg-7" data-aos="fade-right">
                         <div class="sig_content">
-                            <div class="sig_subtitle page_subtitle ">Advice and Guidance</div>
-                            <div class="sig_title text-right "><h1 class="saheltitle">راهنمایی و مشاوره</h1></div>
+                            <div class="sig_subtitle page_subtitle" id="g_en_title"><!--- fetch here --></div>
+                            <div class="sig_title text-right "><h1 class="saheltitle" id="g_title"><!-- fetch here --></h1></div>
 
                             <div class="sig_name_container d-flex flex-row align-items-start justify-content-start">
-                                <div class="sig_name text-right  ">برای درخواست مشاوره رایگان می توانید از لینک زیر استفاده کنید </div>
+                                <div class="sig_name text-right" id="g_body_text">
+                                
+                                    <!-- fetch here -->
+                                
+                                </div>
                             </div>
-                            <div class="button sig_button trans_200 "><a href="consultation.html">درخواست مشاوره</a></div>
+                            <div class="button sig_button trans_200">
+                                <a href="consultation.html" id="g_btn_text">
+                                
+                                        <!-- fetch here -->
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -489,8 +828,8 @@
                 <div class="row">
                     <div class="col-lg-7 offset-lg-5">
                         <div class="sig_image hid2" data-aos="fade-left">
-                            <div class="background_image" style="background-image:url(images/advice.jpg)"></div>
-                            <img src="images/advice.jpg" alt="">
+                            <div class="background_image" id="g_backimg_"></div>
+                            <img alt="" id="g_backimg">
                         </div>
                     </div>
                 </div>
@@ -499,162 +838,190 @@
     </div>
 
 
-    <div >
 
+<div>
 
             <div class="row">
             <div class="col">
                 <div class="themenu_title_bar_container">
-                    <div class="themenu_stars text-center page_subtitle">Immigration</div>
+                    <div class="themenu_stars text-center page_subtitle" id="yh_immigration_en"><!-- fetch here --></div>
 
                     <div class="themenu_title_bar d-flex flex-column align-items-center justify-content-center">
-                        <div class="themenu_title saheltitle">مهاجرت</div>
+                        <div class="themenu_title saheltitle" id="yh_immigration"><!-- fetch here --></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/Immigration2.jpg" data-speed="1.25"></div>
+        <div class="parallax_background parallax-window" data-parallax="scroll" id="yh_immigration_back_img" data-speed="1.25"></div>
+        
         <div class="container">
-        <div class="themenu bg-transparent">
+          <div class="themenu bg-transparent">
             <div class="row themenu_row ">
 
-
+            <!-- =================================================================================== -->
                 <div class="col-lg-4 themenu_column" data-aos="zoom-out-left">
                     <div class="themenu_col text-center bg-white " style="border: dotted 2px black">
 
-                        <img src="images/aus.png">
-                        <a href="content.html"><div class="themenu_col_title col-lg-6 mt-3 " data-aos="zoom-in-down" style="font-size: 25px">Australia</div></a>
-                        <a href="content.html"><div class="themenu_col_title col-lg-5 mt-3" data-aos="zoom-in-down" style="font-size: 25px">استرالیا</div></a>
+
+                        <!-- main_country_n1 -->
+
+                        <img id="main_country_n1_back_img">
+                        <a id="main_country_n1_en_slug">
+                            <div class="themenu_col_title col-lg-6 mt-3" id="main_country_n1_en_name" data-aos="zoom-in-down" 
+                            style="font-size: 25px">
+                                <!-- fetch here -->
+                            </div>
+                        </a>
+                        
+                        <a id="main_country_n1_slug">
+                            <div class="themenu_col_title col-lg-5 mt-3" id="main_country_n1_name" data-aos="zoom-in-down" 
+                            style="font-size: 25px">
+                                <!-- fetch here -->
+                            </div>
+                        </a>
 
 
                     </div>
                 </div>
+                
+                <!-- =================================================================================== -->
+
                 <div class="col-lg-4 themenu_column" data-aos="flip-up">
                     <div class="themenu_col text-center bg-white " style="border: dotted 2px black">
 
-                        <img src="images/canada.png">
-                        <a href="content.html"><div class="themenu_col_title col-lg-6 mt-3" data-aos="zoom-in-down" style="font-size: 25px">Canada</div></a>
-                        <a href="content.html"><div class="themenu_col_title col-lg-5 mt-3" data-aos="zoom-in-down" style="font-size: 25px">کانادا</div></a>
+                        <!-- main_country_n2 -->
+
+                        <img id="main_country_n2_back_img">
+                        <a id="main_country_n2_en_slug">
+                            <div class="themenu_col_title col-lg-6 mt-3" id="main_country_n2_en_name" data-aos="zoom-in-down" 
+                            style="font-size: 25px">
+                                <!-- fetch here -->
+                            </div>
+                        </a>
+                        
+                        <a id="main_country_n2_slug">
+                            <div class="themenu_col_title col-lg-5 mt-3" data-aos="zoom-in-down" 
+                            style="font-size: 25px" id="main_country_n2_name">
+                                <!-- fetch here -->
+                            </div>
+                        </a>
 
 
                     </div>
                 </div>
+
+                <!-- =================================================================================== -->
+                
                 <div class="col-lg-4 themenu_column" data-aos="zoom-out-right">
                     <div class="themenu_col text-center bg-white" style="border: dotted 2px black">
 
-                        <img src="images/newsl.jpg">
+                        <!-- main_country_n3 -->
 
-                       <a href="content.html" ><div class="themenu_col_title col-lg-7 mt-3 " data-aos="zoom-in-down" style="padding-left: 10px !important;font-size: 25px">NewZealand</div></a>
-                        <a href="content.html"><div class="themenu_col_title col-lg-4 mt-3" data-aos="zoom-in-down" style="font-size: 25px">نیوزلند</div></a>
+                        <img id="main_country_n3_back_img">
+
+                       <a id="main_country_n3_en_slug">
+                            <div class="themenu_col_title col-lg-7 mt-3 " data-aos="zoom-in-down" 
+                            style="padding-left: 10px !important;font-size: 25px" id="main_country_n3_en_name">
+                                <!-- fetch here -->
+                            </div>
+                        </a>
+
+                        <a id="main_country_n3_slug">
+                            <div class="themenu_col_title col-lg-4 mt-3" data-aos="zoom-in-down" id="main_country_n3_name"
+                            style="font-size: 25px">
+                                <!-- fetch here -->
+                            </div>
+                        </a>
 
 
 
                     </div>
                 </div>
 
-
+                <!-- =================================================================================== -->
 
             </div>
-</div>
-            <div class="intro_title text-center container " data-aos="zoom-in-down"><h2 class="bg-white saheltitle" style="margin-bottom:0"> ــــــــ سایر کشورها ــــــــ</h2></div>
         </div>
+        
+
+
+            <div class="intro_title text-center container " data-aos="zoom-in-down">
+                <h2 class="bg-white saheltitle" style="margin-bottom:0"> ــــــــ سایر کشورها ــــــــ</h2>
+            </div>
+    </div>
+
+
 <div class="bg-white row ">
+
+<!-- ============================================================================================= -->
     <div class="col-lg-4">
-    <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
 
-        <div class="carousel-inner text-dark font-weight-bold rounded " style="width: 20%;margin-left: 40%;border: dotted 2px black;font-size: 18px; box-shadow: 0px 0px 30px rgba(0,0,0,0.5);"  role="listbox">
-            <div class="carousel-item active"><a href="content.html">
-                <img style="width: 100%;padding: 5px " class="d-block img-fluid rounded border-primary" src="images/ch.svg" alt="First slide">
-                <div class="card-title text-center saheltitle">سوئیس</div>
-            </a></div>
-            <div class="carousel-item"><a href="content.html">
-                <img style="width: 100%;padding: 5px " class="d-block img-fluid rounded" src="images/am.svg" alt="Second slide">
-                <div class="card-title text-center saheltitle">ارمنستان</div>
-            </a></div>
-            <div class="carousel-item"><a href="content.html">
-                <img style="width: 100%;padding: 5px " class="d-block img-fluid rounded" src="images/at.svg" alt="Third slide">
-                <div class="card-title text-center saheltitle">اتریش</div>
-            </a></div>
-            <div class="carousel-item"><a href="content.html">
-                <img style="width: 100%;padding: 5px " class="d-block img-fluid rounded" src="images/by.svg" alt="Third slide">
-                <div class="card-title text-center saheltitle">بلاروس</div>
-            </a></div>
+            <div class="carousel-inner text-dark font-weight-bold rounded " style="width: 20%;margin-left: 40%;border: dotted 2px black;font-size: 18px; box-shadow: 0px 0px 30px rgba(0,0,0,0.5);"  role="listbox" id="countries_first_card">
+                
+                
+                    <!-- fetch here -->
+                
+
+            </div>
+            
+            <a class="carousel-control-prev " href="#carouselExampleIndicators" style="margin-left: 25%" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark" id="first_arroc_left" aria-hidden="true"></span>
+
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" style="margin-right: 25%" role="button" data-slide="next">
+                <span class="carousel-control-next-icon bg-dark" id="first_arroc_right" aria-hidden="true"></span>
+            </a>
+        
         </div>
-        <a class="carousel-control-prev " href="#carouselExampleIndicators" style="margin-left: 25%" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon bg-dark"  aria-hidden="true"></span>
-
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" style="margin-right: 25%" role="button" data-slide="next">
-            <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
-        </a>
     </div>
 
-    </div>
+<!-- ============================================================================================= -->
     <div class="col-lg-4">
         <div id="carouselExampleIndicators2" class="carousel slide my-4" data-ride="carousel">
 
-            <div class="carousel-inner text-dark font-weight-bold rounded " style="width: 20%;margin-left: 40%;border: dotted 2px black;font-size: 18px;box-shadow: 0px 0px 30px rgba(0,0,0,0.5);"  role="listbox">
-                <div class="carousel-item active"><a href="content.html">
-                    <img style="width: 100%;padding: 5px " class="d-block img-fluid rounded" src="images/hu.svg" alt="First slide">
-                    <div class="card-title text-center saheltitle">مجارستان</div>
-                </a></div>
-                <div class="carousel-item"><a href="content.html">
-                    <img style="width: 100%;padding: 5px " class="d-block img-fluid rounded" src="images/it.svg" alt="Second slide">
-                    <div class="card-title text-center saheltitle">ایتالیا</div>
-                </a></div>
-                <div class="carousel-item"><a href="content.html">
-                    <img style="width: 100%;padding: 5px " class="d-block img-fluid rounded" src="images/pl.svg" alt="Third slide">
-                    <div class="card-title text-center saheltitle">لهستان</div>
-                </a></div>
-                <div class="carousel-item"><a href="content.html">
-                    <img style="width: 100%;padding: 5px " class="d-block img-fluid rounded" src="images/se.svg" alt="Third slide">
-                    <div class="card-title text-center saheltitle">سوئد</div>
-                </a></div>
+            <div class="carousel-inner text-dark font-weight-bold rounded " style="width: 20%;margin-left: 40%;border: dotted 2px black;font-size: 18px;box-shadow: 0px 0px 30px rgba(0,0,0,0.5);"  role="listbox" id="countries_second_card">
+                
+
+                    <!-- fetch here -->
+
+
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators2" style="margin-left: 25%" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                <span class="carousel-control-prev-icon bg-dark" id="second_arroc_left" aria-hidden="true"></span>
 
             </a>
             <a class="carousel-control-next" href="#carouselExampleIndicators2" style="margin-right: 25%" role="button" data-slide="next">
-                <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                <span class="carousel-control-next-icon bg-dark" id="second_arroc_right" aria-hidden="true"></span>
 
             </a>
         </div>
     </div>
+
+<!-- ============================================================================================= -->
     <div class="col-lg-4">
         <div id="carouselExampleIndicators3" class="carousel slide my-4" data-ride="carousel">
 
-            <div class="carousel-inner text-dark font-weight-bold rounded " style="width: 20%;margin-left: 40% ;border: dotted 2px black;font-size: 18px;box-shadow: 0px 0px 30px rgba(0,0,0,0.5);"  role="listbox">
-                <div class="carousel-item active"><a href="content.html">
-                    <img style="width: 100%;padding: 5px " class="d-block img-fluid rounded" src="images/cn.svg" alt="First slide">
-                    <div class="card-title text-center saheltitle">چین</div>
-                </a></div>
-                <div class="carousel-item"><a href="content.html">
-                    <img style="width: 100%;padding: 5px " class="d-block img-fluid rounded border-dark" src="images/cy.svg" alt="Second slide">
-                    <div class="card-title text-center saheltitle" >قبرس</div>
-                </a></div>
-                <div class="carousel-item"><a href="content.html">
-                    <img style="width: 100%;padding: 5px " class="d-block img-fluid rounded" src="images/de.svg" alt="Third slide">
-                    <div class="card-title text-center saheltitle">آلمان</div>
-                </a></div>
-                <div class="carousel-item"><a href="content.html">
-                    <img style="width: 100%;padding: 5px " class="d-block img-fluid rounded" src="images/ua.svg" alt="Third slide">
-                    <div class="card-title text-center saheltitle">اکراین</div>
-                </a></div>
+            <div class="carousel-inner text-dark font-weight-bold rounded " style="width: 20%;margin-left: 40% ;border: dotted 2px black;font-size: 18px;box-shadow: 0px 0px 30px rgba(0,0,0,0.5);"  role="listbox" id="countries_third_card">
+               
+
+                    <!-- fetch here -->
+
+
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators3" style="margin-left: 25%" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                <span class="carousel-control-prev-icon bg-dark" id="third_arroc_left" aria-hidden="true"></span>
 
             </a>
             <a class="carousel-control-next" href="#carouselExampleIndicators3" style="margin-right: 25%;: 25%" role="button" data-slide="next">
-                <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                <span class="carousel-control-next-icon bg-dark" id="third_arroc_right" aria-hidden="true"></span>
 
             </a>
         </div>
     </div>
+<!-- ============================================================================================= -->
+  </div>
 </div>
-
-    </div>
 
 
 
@@ -662,200 +1029,125 @@
     <div class="row">
         <div class="col">
             <div class="themenu_title_bar_container">
-                <div class="themenu_stars text-center page_subtitle">Language Courses</div>
+                <div class="themenu_stars text-center page_subtitle" id="yh_lc_en"><!-- fetch here --></div>
 
                 <div class="themenu_title_bar d-flex flex-column align-items-center justify-content-center">
-                    <div class="themenu_title ">دوره های زبان موسسه کندو</div>
+                    <div class="themenu_title" id="yh_lc"><!-- fetch here --></div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/language3.jpg" data-speed="0.8"  ></div>
+    <div class="parallax_background parallax-window" data-parallax="scroll" id="yh_lc_back_img" data-image-src="" data-speed="0.8"  ></div>
 
 <div class="container" >
 
     <div class="blog bg-transparent">
 
             <div class="row">
-
+<!-- ============================================================================================= -->
                 <div class="col-lg-3 blog_col ">
                     <div id="carouselExampleIndicators11" class="carousel slide my-4" data-ride="carousel">
+                        <div class="carousel-inner text-dark font-weight-bold" role="listbox" id="first_card_language_courses">
 
-                        <div class="carousel-inner text-dark font-weight-bold "   role="listbox">
-                            <div class="carousel-item active pt-4"><a href="content.html">
-                                <div class="blog_post " data-aos="fade-up"
-                                     data-aos-anchor-placement="bottom-bottom">
-                                    <div class="blog_post_image_container">
-                                        <div class="blog_post_image"><img src="images/flag1.jpg" alt="https://unsplash.com/@patrick_schneider"></div>
-                                        <div class="blog_post_date"><a href="content.html">Malta</a></div>
-                                    </div>
-                                    <div class="blog_post_content">
-                                        <div class="blog_post_title text-center "><a href="content.html" style="font-size: 25px">دوره های زبان در مالتا</a></div>
-                                    </div>
-                                </div>
-                            </a></div>
-                            <div class="carousel-item  pt-4"><a href="content.html">
-                                <div class="blog_post " data-aos="fade-up"
-                                     data-aos-anchor-placement="bottom-bottom">
-                                    <div class="blog_post_image_container">
-                                        <div class="blog_post_image"><img src="images/flag1.jpg" alt="https://unsplash.com/@patrick_schneider"></div>
-                                        <div class="blog_post_date"><a href="content.html">Malta</a></div>
-                                    </div>
-                                    <div class="blog_post_content">
-                                        <div class="blog_post_title text-center "><a href="content.html" style="font-size: 25px">دوره های زبان در مالتا</a></div>
-                                    </div>
-                                </div>
-                            </a></div>
+                    <!-- -------------------------------------------------------------- -->
+                           
+                           <!-- fetch here -->
+
+                    <!-- -------------------------------------------------------------- -->
+
                         </div>
+
+
                         <a class="carousel-control-prev" href="#carouselExampleIndicators11"  role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                            <span class="carousel-control-prev-icon bg-dark" id="first_arrlg_left" aria-hidden="true"></span>
 
                         </a>
                         <a class="carousel-control-next" href="#carouselExampleIndicators11"  role="button" data-slide="next">
-                            <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                            <span class="carousel-control-next-icon bg-dark" id="first_arrlg_right" aria-hidden="true"></span>
 
                         </a>
                     </div>
                 </div>
-
+<!-- ============================================================================================= -->
                 <div class="col-lg-3 blog_col "  style="margin-bottom: 150px">
                     <div id="carouselExampleIndicators12" class="carousel slide my-4" data-ride="carousel">
 
-                        <div class="carousel-inner text-dark font-weight-bold "   role="listbox">
-                            <div class="carousel-item active pt-4"><a href="content.html">
-                                <div class="blog_post" data-aos="fade-up"
-                                     data-aos-anchor-placement="bottom-bottom">
-                                    <div class="blog_post_image_container">
-                                        <div class="blog_post_image"><img src="images/flag2.jpg" alt="https://unsplash.com/@tashytown"></div>
-                                        <div class="blog_post_date"><a href="content.html">England</a></div>
-                                    </div>
-                                    <div class="blog_post_content">
-                                        <div class="blog_post_title text-center"><a href="content.html" style="font-size: 25px">دوره های زبان در انگلیس</a></div>
+                        <div class="carousel-inner text-dark font-weight-bold" role="listbox" id="second_card_language_courses">
+                            
 
-                                    </div>
-                                </div>
-                            </a></div>
-                            <div class="carousel-item  pt-4"><a href="content.html">
-                                <div class="blog_post" data-aos="fade-up"
-                                     data-aos-anchor-placement="bottom-bottom">
-                                    <div class="blog_post_image_container">
-                                        <div class="blog_post_image"><img src="images/flag2.jpg" alt="https://unsplash.com/@tashytown"></div>
-                                        <div class="blog_post_date"><a href="content.html">England</a></div>
-                                    </div>
-                                    <div class="blog_post_content">
-                                        <div class="blog_post_title text-center"><a href="content.html" style="font-size: 25px">دوره های زبان در انگلیس</a></div>
+                            <!-- -------------------------------------------------------------- -->
+                           
+                                      <!-- fetch here -->
 
-                                    </div>
-                                </div>
-                            </a></div>
+                            <!-- -------------------------------------------------------------- -->
+
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators11"  role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators12"  role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon bg-dark" id="second_arrlg_left" aria-hidden="true"></span>
 
                         </a>
                         <a class="carousel-control-next" href="#carouselExampleIndicators12"  role="button" data-slide="next">
-                            <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                            <span class="carousel-control-next-icon bg-dark" id="second_arrlg_right" aria-hidden="true"></span>
 
                         </a>
                     </div>
                 </div>
-
+<!-- ============================================================================================= -->
                 <div class="col-lg-3 blog_col ">
                     <div id="carouselExampleIndicators13" class="carousel slide my-4" data-ride="carousel">
 
-                        <div class="carousel-inner text-dark font-weight-bold "   role="listbox">
-                            <div class="carousel-item active pt-4"><a href="content.html">
-                                <div class="blog_post" data-aos="fade-up"
-                                     data-aos-anchor-placement="bottom-bottom">
-                                    <div class="blog_post_image_container">
-                                        <div class="blog_post_image"><img src="images/MalaysiaFlag.jpg" alt="https://unsplash.com/@stefanjonhson"></div>
-                                        <div class="blog_post_date"><a href="content.html">Malaysia</a></div>
-                                    </div>
-                                    <div class="blog_post_content">
-                                        <div class="blog_post_title text-center"><a href="content.html" style="font-size: 25px">دوره های زبان در مالزی</a></div>
+                        <div class="carousel-inner text-dark font-weight-bold" role="listbox" id="third_card_language_courses">
 
-                                    </div>
-                                </div>
-                            </a></div>
-                            <div class="carousel-item  pt-4"><a href="content.html">
-                                <div class="blog_post" data-aos="fade-up"
-                                     data-aos-anchor-placement="bottom-bottom">
-                                    <div class="blog_post_image_container">
-                                        <div class="blog_post_image"><img src="images/MalaysiaFlag.jpg" alt="https://unsplash.com/@stefanjonhson"></div>
-                                        <div class="blog_post_date"><a href="content.html">Malaysia</a></div>
-                                    </div>
-                                    <div class="blog_post_content">
-                                        <div class="blog_post_title text-center"><a href="content.html" style="font-size: 25px">دوره های زبان در مالزی</a></div>
+                            <!-- -------------------------------------------------------------- -->
+                           
+                                      <!-- fetch here -->
 
-                                    </div>
-                                </div>
-                            </a></div>
+                            <!-- -------------------------------------------------------------- -->
+                        
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators11"  role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                        
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators13"  role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon bg-dark" id="third_arrlg_left" aria-hidden="true"></span>
 
                         </a>
                         <a class="carousel-control-next" href="#carouselExampleIndicators13"  role="button" data-slide="next">
-                            <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                            <span class="carousel-control-next-icon bg-dark" id="third_arrlg_right" aria-hidden="true"></span>
 
                         </a>
                     </div>
                 </div>
-
+<!-- ============================================================================================= -->
                 <div class="col-lg-3 blog_col ">
                     <div id="carouselExampleIndicators14" class="carousel slide my-4" data-ride="carousel">
 
-                        <div class="carousel-inner text-dark font-weight-bold "   role="listbox">
-                            <div class="carousel-item active pt-4"><a href="content.html">
-                                <div class="blog_post" data-aos="fade-up"
-                                     data-aos-anchor-placement="bottom-bottom">
-                                    <div class="blog_post_image_container">
-                                        <div class="blog_post_image"><img src="images/swiss.jpg" alt="Jackelin Slack"></div>
-                                        <div class="blog_post_date"><a href="content.html">Swiss</a></div>
-                                    </div>
-                                    <div class="blog_post_content">
-                                        <div class="blog_post_title text-center"><a href="content.html" style="font-size: 25px">دوره های زبان در سوئیس</a></div>
+                        <div class="carousel-inner text-dark font-weight-bold" role="listbox" id="fourth_card_language_courses">
+                            
 
-                                    </div>
-                                </div>
-                            </a></div>
-                            <div class="carousel-item  pt-4"><a href="content.html">
-                                <div class="blog_post" data-aos="fade-up"
-                                     data-aos-anchor-placement="bottom-bottom">
-                                    <div class="blog_post_image_container">
-                                        <div class="blog_post_image"><img src="images/swiss.jpg" alt="Jackelin Slack"></div>
-                                        <div class="blog_post_date"><a href="content.html">Swiss</a></div>
-                                    </div>
-                                    <div class="blog_post_content">
-                                        <div class="blog_post_title text-center"><a href="content.html" style="font-size: 25px">دوره های زبان در سوئیس</a></div>
+                             <!-- -------------------------------------------------------------- -->
+                           
+                                      <!-- fetch here -->
 
-                                    </div>
-                                </div>
-                            </a></div>
+                            <!-- -------------------------------------------------------------- -->
+
+
+
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators14"  role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                            <span class="carousel-control-prev-icon bg-dark" id="fourth_arrlg_left" aria-hidden="true"></span>
 
                         </a>
                         <a class="carousel-control-next" href="#carouselExampleIndicators14"  role="button" data-slide="next">
-                            <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                            <span class="carousel-control-next-icon bg-dark" id="fourth_arrlg_right" aria-hidden="true"></span>
 
                         </a>
                     </div>
                 </div>
-
-
-
-
+<!-- ============================================================================================= -->
             </div>
-
-
     </div>
 </div>
 </div>
-
-
-
 
 
 
@@ -863,62 +1155,35 @@
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-lg-3 border-right border-dark">
-               <div class=""><h2 class="text-center saheltitle " data-aos="fade-right" data-aos-duration="500"> فهرست مقالات  </h2></div>
+               <div class=""><h2 class="text-center saheltitle " data-aos="fade-right" data-aos-duration="500"> برگزیده ها  </h2></div>
                 <div class="text-right ">
-                    <ul>
-                        <li><a class="btn btn-outline-dark mt-2 mr-4" data-aos="fade-right" data-aos-duration="500" href="content.html">فهرست موسسات مجاز وزارت علوم </a></li>
-                        <li><a class="btn btn-outline-dark mt-2 mr-4" data-aos="fade-right" data-aos-duration="500" href="content.html"> وزارت علوم و تحقیقات و فناوری</a></li>
-                        <li><a class="btn btn-outline-dark mt-2 mr-4" data-aos="fade-right" data-aos-duration="500" href="content.html">دانشگاه تهران </a></li>
-                        <li><a class="btn btn-outline-dark mt-2 mr-4" data-aos="fade-right" data-aos-duration="500" href="content.html"> تهران آیلتس</a></li>
-                        <li><a  class="btn btn-outline-dark mt-2 mr-4" data-aos="fade-right" data-aos-duration="500" href="content.html"> انجمن موسسات اعزام دانشجو</a></li>
-                        <li><a class="btn btn-outline-dark mt-2 mr-4" data-aos="fade-right" data-aos-duration="500" href="content.html"> IELTS شرکت بین المللی ترجمه</a></li>
-                        <li><a class="btn btn-outline-dark mt-2 mr-4" data-aos="fade-right" data-aos-duration="500" href="content.html"> ایی.تی.اس</a></li>
-                        <li><a class="btn btn-outline-dark mt-2 mr-4" data-aos="fade-right" data-aos-duration="500" href="content.html"> آی.دی.پی</a></li>
+                    <ul id="articles">
+                        
+                        <!-- fetch articles here -->
+
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-9">
-               <h2 class="text-center saheltitle" data-aos="fade-up"> آخرین خبرها  </h2>
-                <div class="text-right mt-1 ">
-                    <div class="row">
-                    <div class="col-lg-10"><h4 data-aos="fade-up"><a href="content.html">تیتر اول</a></h4>
-                        <p data-aos="fade-up"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
-                    </div>
-                    <div class="col-lg-2" data-aos="fade-up"><a href="content.html"><img style="width: 100%" src="images/news.png"></a></div>
-                    </div>
+            <div class="col-lg-9" id="posts">
+               <h2 class="text-center saheltitle" data-aos="fade-up"> مجله ی خبری  </h2>
+               
 
-                </div>
-                <div class="text-right mt-1">
-                    <div class="row">
-                        <div class="col-lg-10"><h4 data-aos="fade-up"><a href="content.html">تیتر دوم</a></h4>
-                            <p data-aos="fade-up"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
-                        </div>
-                        <div class="col-lg-2" data-aos="fade-up"><a href="content.html"><img style="width: 100%" src="images/news.png"></a></div>
-                    </div>
+               <!-- fetch posts here -->
 
-                </div>
-                <div class="text-right mt-1">
-                    <div class="row">
-                        <div class="col-lg-10"><h4 data-aos="fade-up"><a href="content.html">تیتر سوم</a></h4>
-                            <p data-aos="fade-up"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
-                        </div>
-                        <div class="col-lg-2" data-aos="fade-up"><a href="content.html"><img style="width: 100%" src="images/news.png"></a></div>
-                    </div>
 
-                </div>
             </div>
 
         </div>
     </div>
 
     <div class="reservations text-center" id="contactus">
-        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/bout.jpg" data-speed="0.8"></div>
+        <div class="parallax_background parallax-window" data-parallax="scroll" id="footer_backimg" data-speed="0.8"></div>
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="reservations_content d-flex flex-column align-items-center justify-content-center">
-                        <div class="res_stars page_subtitle">CDS</div>
-                        <div class="res_title hov">با ما در ارتباط باشید</div>
+                        <div class="res_stars page_subtitle" id="footer_cds_name"><!-- fetch here --></div>
+                        <div class="res_title hov" id="footer_middle_title"><!-- fetch here --></div>
 
                         <div class="row mt-5 " >
                             <div class="col-4 mp hov" >
@@ -927,28 +1192,39 @@
                                         در شبکه های اجتماعی:
 
                                 </div>
-                                <div class="mt-2">
-                                    <a href="https://www.instagram.com/"><img src="images/instagram.png"></a>
-                                    <a href="https://t.me/"><img src="images/telegram.png"></a>
+                                
+                            
+                                <div class="mt-2" id="social_media">
+                                    <!-- fetch here -->
                                 </div>
+                            
+
                             </div>
                             <div class="col-4 text-right home_text ">
-                                <p class="hov" style="margin-bottom: -0.1% ;font-size: 12px">نشانی:ساری- میدان امام-ساختمان برلیان-طبقه اول-بالای بانک تجارت،واحد شماره 19</p>
-                                <p class="hov" style="font-size: 12px">لطفا قبل از آمدن به موسسه با کارشناسان موسسه تماس بگیرید</p>
+                                <div class="hov" style="margin-bottom: -0.1% ;font-size: 12px" id="footer_middle_text">
+                                    
+                                    <!-- fetch here -->
+
+                                </div>
 
                             </div>
                             <div class="col-4 text-right home_text" style="direction: rtl">
-                                <p class="hov" style="margin-bottom: -0.1%;font-size: 12px">موسسه اعزام دانشجو کندو دکتر عزیزی</p>
-                                <p class="hov" style="margin-bottom: -0.1%;font-size: 12px">با مجوز وزارت علوم</p>
-                                <p class="hov" style="margin-bottom: -0.1%;font-size: 12px">شماره های تماس جهت تعیین وقت</p>
-                                <p class="hov" style="margin-bottom: -0.1%;font-size: 12px">011333675000</p>
-                                <p class="hov" style="font-size: 12px">09030612326</p>
+                                <div class="hov" style="margin-bottom: -0.1%;font-size: 12px" id="footer_right_text">
+
+                                    <!-- fetch here -->
+                                
+                                </div>
 
                             </div>
 
                         </div>
-                        <div class="button btn-outline-light text-light sig_button trans_200 "><a href="content.html">تماس با ما</a></div>
-                        <!--<button class="res_button">تماس با ما</button>-->
+                        <div class="button btn-outline-light text-light sig_button trans_200 ">
+                            <a href="content.html" id="contact_btn">
+
+                                <!-- fetch here -->
+                            
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -959,21 +1235,16 @@
     <footer class="footer" >
         <div class="container" >
             <div class="row text-center" >
-
                 <div class="col-lg-6 ">
                     <div class="footer_logo">
-
-
                         <div class="footer_logo_title">CDS</div>
                         <div class="footer_logo_subtitle">we build careers</div>
                     </div>
-
                 </div>
                 <div class="home_text col-lg-6" style="margin-top: 20px;font-size: 11px">
-                    Design by:
+                    Designed by:
                     <a href="#" class="mt-0">yucatán</a>
                 </div>
-
             </div>
         </div>
     </footer>
