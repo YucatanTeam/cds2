@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
     // fetch header
         fetch('http://cdsapply.ir/headers')
             .then(response => response.json())
@@ -36,6 +37,7 @@
                 }
                 
             })
+        })
 </script>
 <head>
 

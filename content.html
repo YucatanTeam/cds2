@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
     // fetch header
         fetch('http://cdsapply.ir/headers')
             .then(response => response.json())
@@ -12,6 +13,7 @@
                 document.getElementById("main_second_line").appendChild(document.createTextNode(headers[0].second_line))
                 document.getElementById("main_third_line").appendChild(document.createTextNode(headers[0].third_line))
             })
+        })
 </script>
 <head>
 
