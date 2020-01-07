@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="fa">
+<script src="js/jquery-3.2.1.min.js"></script>
 <script>
 
-    window.addEventListener('DOMContentLoaded', (event) => {
-            
         // fetch posts
        fetch('http://cdsapply.ir/posts')
               .then(response => response.json())
@@ -205,7 +204,7 @@
                 var countries_first_card = document.getElementById("countries_first_card")
                 var countries_second_card = document.getElementById("countries_second_card")
                 var countries_third_card = document.getElementById("countries_third_card")
-                var main_counties = {}
+                var main_countries = {}
 
                 for(i = 0; i < countries.length; i++){
                     
@@ -224,7 +223,7 @@
                         clink.appendChild(secdiv)
                         fdiv.appendChild(clink)
 
-                    if(countries[i].main && Object.keys(main_counties).length <=3 ) main_counties[countries[i].id] = countries[i]
+                    if(countries[i].main && Object.keys(main_countries).length <=3 ) main_countries[countries[i].id] = countries[i]
                     if(countries[i].first_card_other_country) countries_first_card.appendChild(fdiv)
                     if(countries[i].second_card_other_country) countries_second_card.appendChild(fdiv)
                     if(countries[i].third_card_other_country) countries_third_card.appendChild(fdiv)
@@ -248,23 +247,27 @@
 
 
                 // TODO : fix slug issue
-                document.getElementById("main_country_n1_back_img").setAttribute("src", "http://cdsapply.ir"+main_counties[1].logo.url)
-                document.getElementById("main_country_n1_en_name").appendChild(document.createTextNode(main_counties[1].en_name))
-                document.getElementById("main_country_n1_name").appendChild(document.createTextNode(main_counties[1].name))
-                document.getElementById("main_country_n1_slug").href = "http://cdsapply.ir/"+main_counties[1].slug
-                document.getElementById("main_country_n1_en_slug").href = "http://cdsapply.ir/"+main_counties[1].en_slug
+                // for (const property in main_countries) {
+                //       console.log(`${property}: ${main_countries[property].en_name}`);
+                //     }
 
-                document.getElementById("main_country_n2_back_img").setAttribute("src", "http://cdsapply.ir"+main_counties[2].logo.url)
-                document.getElementById("main_country_n2_en_name").appendChild(document.createTextNode(main_counties[2].en_name))
-                document.getElementById("main_country_n2_name").appendChild(document.createTextNode(main_counties[2].name))
-                document.getElementById("main_country_n2_slug").href = "http://cdsapply.ir/"+main_counties[2].slug
-                document.getElementById("main_country_n2_en_slug").href = "http://cdsapply.ir/"+main_counties[2].en_slug
+                document.getElementById("main_country_n1_back_img").setAttribute("src", "http://cdsapply.ir"+main_countries[1].logo.url)
+                document.getElementById("main_country_n1_en_name").appendChild(document.createTextNode(main_countries[1].en_name))
+                document.getElementById("main_country_n1_name").appendChild(document.createTextNode(main_countries[1].name))
+                document.getElementById("main_country_n1_slug").href = "http://cdsapply.ir/"+main_countries[1].slug
+                document.getElementById("main_country_n1_en_slug").href = "http://cdsapply.ir/"+main_countries[1].en_slug
 
-                document.getElementById("main_country_n3_back_img").setAttribute("src", "http://cdsapply.ir"+main_counties[3].logo.url)
-                document.getElementById("main_country_n3_en_name").appendChild(document.createTextNode(main_counties[3].en_name))
-                document.getElementById("main_country_n3_name").appendChild(document.createTextNode(main_counties[3].name))
-                document.getElementById("main_country_n3_slug").href = "http://cdsapply.ir/"+main_counties[3].slug
-                document.getElementById("main_country_n3_en_slug").href = "http://cdsapply.ir/"+main_counties[3].en_slug
+                document.getElementById("main_country_n2_back_img").setAttribute("src", "http://cdsapply.ir"+main_countries[2].logo.url)
+                document.getElementById("main_country_n2_en_name").appendChild(document.createTextNode(main_countries[2].en_name))
+                document.getElementById("main_country_n2_name").appendChild(document.createTextNode(main_countries[2].name))
+                document.getElementById("main_country_n2_slug").href = "http://cdsapply.ir/"+main_countries[2].slug
+                document.getElementById("main_country_n2_en_slug").href = "http://cdsapply.ir/"+main_countries[2].en_slug
+
+                document.getElementById("main_country_n3_back_img").setAttribute("src", "http://cdsapply.ir"+main_countries[16].logo.url)
+                document.getElementById("main_country_n3_en_name").appendChild(document.createTextNode(main_countries[16].en_name))
+                document.getElementById("main_country_n3_name").appendChild(document.createTextNode(main_countries[16].name))
+                document.getElementById("main_country_n3_slug").href = "http://cdsapply.ir/"+main_countries[16].slug
+                document.getElementById("main_country_n3_en_slug").href = "http://cdsapply.ir/"+main_countries[16].en_slug
 
             })
 
@@ -357,7 +360,6 @@
 
 
                 })
-        });
 
 
 </script>
@@ -647,7 +649,6 @@
                                 <li><a href="#contactus" style="font-size: 12px;">تماس با کندو</a></li>
                                 <li><a href="cando-testimonial.html" style="font-size: 12px;">گواه نوشت</a></li>
                                 <li><a href="#wbn" style="font-size: 12px;">مشاوره مهاجرت</a></li>
-                                <li><a href="hhtp://cdsapply.ir/admin" style="font-size: 12px;">ورود</a></li>
                                 <li><a href="index_english.html" style="font-size: 12px;" class="btn btn-outline-light" href="index.html">EN</a></li>
                                 <li class=" rounded">
                                     <button type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
@@ -685,9 +686,8 @@
             <ul>
                 <li><a href="index_english.html" class="btn btn-outline-light align-content-center" style="width: fit-content;margin-left:37%" >EN</a></li>
 
-                <li><a href="hhtp://cdsapply.ir/admin">ورود</a></li>
                 <li><a href="#contactus" onClick="window.location.reload()">تماس با کندو</a></li>
-                <li><a href="cando-certificate.html">گواه نوشت</a></li>
+                <li><a href="cando-testimonial.html">گواه نوشت</a></li>
                 <li><a href="#wbn" onClick="window.location.reload()">مشاوره مهاجرت</a></li>
                 <li >
                     <button type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
@@ -921,7 +921,7 @@
 
                        <a id="main_country_n3_en_slug">
                             <div class="themenu_col_title col-lg-7 mt-3 " data-aos="zoom-in-down" 
-                            style="padding-left: 10px !important;font-size: 25px" id="main_country_n3_en_name">
+                            style="padding-left: 10px !important;font-size: 22px" id="main_country_n3_en_name">
                                 <!-- fetch here -->
                             </div>
                         </a>
@@ -955,7 +955,7 @@
 
 <!-- ============================================================================================= -->
     <div class="col-lg-4">
-        <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+        <div id="card-f" class="carousel slide my-4" data-ride="carousel">
 
             <div class="carousel-inner text-dark font-weight-bold rounded " style="width: 20%;margin-left: 40%;border: dotted 2px black;font-size: 18px; box-shadow: 0px 0px 30px rgba(0,0,0,0.5);"  role="listbox" id="countries_first_card">
                 
@@ -965,11 +965,11 @@
 
             </div>
             
-            <a class="carousel-control-prev " href="#carouselExampleIndicators" style="margin-left: 25%" role="button" data-slide="prev">
+            <a class="carousel-control-prev " href="#card-f" style="margin-left: 25%" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon bg-dark" id="first_arroc_left" aria-hidden="true"></span>
 
             </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" style="margin-right: 25%" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#card-f" style="margin-right: 25%" role="button" data-slide="next">
                 <span class="carousel-control-next-icon bg-dark" id="first_arroc_right" aria-hidden="true"></span>
             </a>
         
@@ -978,7 +978,7 @@
 
 <!-- ============================================================================================= -->
     <div class="col-lg-4">
-        <div id="carouselExampleIndicators2" class="carousel slide my-4" data-ride="carousel">
+        <div id="card-s" class="carousel slide my-4" data-ride="carousel">
 
             <div class="carousel-inner text-dark font-weight-bold rounded " style="width: 20%;margin-left: 40%;border: dotted 2px black;font-size: 18px;box-shadow: 0px 0px 30px rgba(0,0,0,0.5);"  role="listbox" id="countries_second_card">
                 
@@ -987,11 +987,11 @@
 
 
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators2" style="margin-left: 25%" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#card-s" style="margin-left: 25%" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon bg-dark" id="second_arroc_left" aria-hidden="true"></span>
 
             </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators2" style="margin-right: 25%" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#card-s" style="margin-right: 25%" role="button" data-slide="next">
                 <span class="carousel-control-next-icon bg-dark" id="second_arroc_right" aria-hidden="true"></span>
 
             </a>
@@ -1000,7 +1000,7 @@
 
 <!-- ============================================================================================= -->
     <div class="col-lg-4">
-        <div id="carouselExampleIndicators3" class="carousel slide my-4" data-ride="carousel">
+        <div id="card-t" class="carousel slide my-4" data-ride="carousel">
 
             <div class="carousel-inner text-dark font-weight-bold rounded " style="width: 20%;margin-left: 40% ;border: dotted 2px black;font-size: 18px;box-shadow: 0px 0px 30px rgba(0,0,0,0.5);"  role="listbox" id="countries_third_card">
                
@@ -1009,11 +1009,11 @@
 
 
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators3" style="margin-left: 25%" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#card-t" style="margin-left: 25%" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon bg-dark" id="third_arroc_left" aria-hidden="true"></span>
 
             </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators3" style="margin-right: 25%;: 25%" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#card-t" style="margin-right: 25%;: 25%" role="button" data-slide="next">
                 <span class="carousel-control-next-icon bg-dark" id="third_arroc_right" aria-hidden="true"></span>
 
             </a>
@@ -1046,7 +1046,7 @@
             <div class="row">
 <!-- ============================================================================================= -->
                 <div class="col-lg-3 blog_col ">
-                    <div id="carouselExampleIndicators11" class="carousel slide my-4" data-ride="carousel">
+                    <div id="card-fo" class="carousel slide my-4" data-ride="carousel">
                         <div class="carousel-inner text-dark font-weight-bold" role="listbox" id="first_card_language_courses">
 
                     <!-- -------------------------------------------------------------- -->
@@ -1058,11 +1058,11 @@
                         </div>
 
 
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators11"  role="button" data-slide="prev">
+                        <a class="carousel-control-prev" href="#card-fo"  role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon bg-dark" id="first_arrlg_left" aria-hidden="true"></span>
 
                         </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators11"  role="button" data-slide="next">
+                        <a class="carousel-control-next" href="#card-fo"  role="button" data-slide="next">
                             <span class="carousel-control-next-icon bg-dark" id="first_arrlg_right" aria-hidden="true"></span>
 
                         </a>
@@ -1070,7 +1070,7 @@
                 </div>
 <!-- ============================================================================================= -->
                 <div class="col-lg-3 blog_col "  style="margin-bottom: 150px">
-                    <div id="carouselExampleIndicators12" class="carousel slide my-4" data-ride="carousel">
+                    <div id="card-fi" class="carousel slide my-4" data-ride="carousel">
 
                         <div class="carousel-inner text-dark font-weight-bold" role="listbox" id="second_card_language_courses">
                             
@@ -1083,11 +1083,11 @@
 
                         </div>
 
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators12"  role="button" data-slide="prev">
+                        <a class="carousel-control-prev" href="#card-fi"  role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon bg-dark" id="second_arrlg_left" aria-hidden="true"></span>
 
                         </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators12"  role="button" data-slide="next">
+                        <a class="carousel-control-next" href="#card-fi"  role="button" data-slide="next">
                             <span class="carousel-control-next-icon bg-dark" id="second_arrlg_right" aria-hidden="true"></span>
 
                         </a>
@@ -1095,7 +1095,7 @@
                 </div>
 <!-- ============================================================================================= -->
                 <div class="col-lg-3 blog_col ">
-                    <div id="carouselExampleIndicators13" class="carousel slide my-4" data-ride="carousel">
+                    <div id="card-si" class="carousel slide my-4" data-ride="carousel">
 
                         <div class="carousel-inner text-dark font-weight-bold" role="listbox" id="third_card_language_courses">
 
@@ -1107,11 +1107,11 @@
                         
                         </div>
                         
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators13"  role="button" data-slide="prev">
+                        <a class="carousel-control-prev" href="#card-si"  role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon bg-dark" id="third_arrlg_left" aria-hidden="true"></span>
 
                         </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators13"  role="button" data-slide="next">
+                        <a class="carousel-control-next" href="#card-si"  role="button" data-slide="next">
                             <span class="carousel-control-next-icon bg-dark" id="third_arrlg_right" aria-hidden="true"></span>
 
                         </a>
@@ -1119,7 +1119,7 @@
                 </div>
 <!-- ============================================================================================= -->
                 <div class="col-lg-3 blog_col ">
-                    <div id="carouselExampleIndicators14" class="carousel slide my-4" data-ride="carousel">
+                    <div id="card-se" class="carousel slide my-4" data-ride="carousel">
 
                         <div class="carousel-inner text-dark font-weight-bold" role="listbox" id="fourth_card_language_courses">
                             
@@ -1133,11 +1133,11 @@
 
 
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators14"  role="button" data-slide="prev">
+                        <a class="carousel-control-prev" href="#card-se"  role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon bg-dark" id="fourth_arrlg_left" aria-hidden="true"></span>
 
                         </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators14"  role="button" data-slide="next">
+                        <a class="carousel-control-next" href="#card-se"  role="button" data-slide="next">
                             <span class="carousel-control-next-icon bg-dark" id="fourth_arrlg_right" aria-hidden="true"></span>
 
                         </a>
