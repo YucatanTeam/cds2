@@ -1,31 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    // fetch header
-        fetch('http://cdsapply.ir/headers')
-            .then(response => response.json())
-            .then(headers => {
-
-                document.getElementById("main_logo").setAttribute("src", "http://cdsapply.ir"+headers[0].logo.url)
-                document.getElementById("main_backimg").setAttribute("data-image-src", "http://cdsapply.ir"+headers[0].background_img.url)
-                document.getElementById("main_first_line").appendChild(document.createTextNode(headers[0].first_line))
-                document.getElementById("main_second_line").appendChild(document.createTextNode(headers[0].second_line))
-                document.getElementById("main_third_line").appendChild(document.createTextNode(headers[0].third_line))
-            })
-
-
-    // fetch certificates
-        fetch('http://cdsapply.ir/candocertificates')
-            .then(response => response.json())
-            .then(candocertificates => {
-
-                var div = document.createElement("div")
-                div.appendChild(document.createTextNode(candocertificates[0].content))
-                div.setAttribute("style", "font-size:18px")
-                div.setAttribute("data-aos", "fade-left")
-                document.getElementById("candocertificates").appendChild(div)
-            })
-</script>
 <head>
 
     <title>Cando Certificate | CDS</title>
@@ -34,6 +8,7 @@
    img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *;
    style-src  'self' 'unsafe-inline' *">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index", follow>
     <meta name="description" content="موسسه اعزام دانشجو کندو">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="images/Logo.png" />
@@ -155,8 +130,8 @@
                                 <li><a href="index.html" style="font-size: 12px;" >  < صفحه اصلی</a></li>
                                 <li><a href="index_english.html" class="btn btn-outline-light" href="index.html">EN</a></li>
                                 <li class=" rounded">
-                                    <button type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
-                                    <input class="search-input" name="q" type="text" placeholder="  جست و جو..." value=""   />
+                                    <button onclick="gotosearch()" type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
+                                    <input id="searchQ" class="search-input" name="q" type="text" placeholder="  جست و جو..." value=""   />
                                 </li>
                             </ul>
                         </nav>
@@ -192,8 +167,8 @@
 
                 <li><a href="index.html">صفحه اصلی</a></li>
                 <li >
-                    <button type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
-                    <input class="search-input" name="q" type="text" placeholder="  جست و جو..." value=""   />
+                    <button onclick="gotosearch()" type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
+                    <input id="searchQ" class="search-input" name="q" type="text" placeholder="  جست و جو..." value=""   />
                 </li>
             </ul>
 
@@ -255,7 +230,7 @@
                 </div>
                 <div class="home_text col-lg-6" style="margin-top: 20px;font-size: 11px">
                     Designed by:
-                    <a href="#" class="mt-0">yucatán</a>
+                    <a href="http://unixerr.com" class="mt-0">yucatán</a>
                 </div>
 
             </div>
@@ -264,6 +239,7 @@
 </div>
 
 <script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/fetch/cando_testimonial.js"></script>
 <script src="styles/bootstrap-4.1.2/popper.js"></script>
 <script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
 <script src="plugins/greensock/TweenMax.min.js"></script>
@@ -299,6 +275,25 @@
 <script>
     AOS.init();
 </script>
+<script>
 
+    var svalue = ''
+    function gotosearch(){
+            window.location = `http://www.google.com.pk/search?btnG=1&pws=0&q=${svalue} site:cdsapply.com`
+            return true;       
+        }
+
+    window.onload=function(){
+
+        var input = document.getElementById("searchQ");
+        input.addEventListener("keydown", function(event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            svalue = input.value
+            document.getElementById("searchQbtn").click();
+          }
+        });
+    }
+</script>
 </body>
 </html>

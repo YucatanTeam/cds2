@@ -1,32 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-
-    // fetch header
-        fetch('http://cdsapply.ir/headers')
-            .then(response => response.json())
-            .then(headers => {
-
-                document.getElementById("main_logo").setAttribute("src", "http://cdsapply.ir"+headers[0].logo.url)
-                document.getElementById("main_backimg").setAttribute("data-image-src", "http://cdsapply.ir"+headers[0].background_img.url)
-                document.getElementById("main_first_line").appendChild(document.createTextNode(headers[0].first_line))
-                document.getElementById("main_second_line").appendChild(document.createTextNode(headers[0].second_line))
-                document.getElementById("main_third_line").appendChild(document.createTextNode(headers[0].third_line))
-            })
-</script>
 <head>
 
-    <title>کندو</title>
+    <title></title>
     <meta charset="utf-8">
+    <meta name="robots" content="index", follow>
     <meta http-equiv="Content-Security-Policy" content="default-src *;
    img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *;
    style-src  'self' 'unsafe-inline' *">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="موسسه اعزام دانشجو کندو">
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="shortcut icon" href="images/Logo.png" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
     <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -77,16 +64,6 @@
             display: none;
         }
     }
-    .boxt {
-        margin-top: 50px;
-        margin-bottom: 50px;
-    }
-    @media screen and (max-width: 600px) {
-        .boxt {
-            margin-top: 100px;
-            margin-bottom: 100px;
-        }
-    }
     .search-input{
         direction: rtl;
         /*border-top-right-radius: 1rem;
@@ -115,7 +92,7 @@
         background-color: transparent;
     }
 </style>
-<body style="background-image: url(images/loginbg.png);background-size:20%;background-repeat: repeat;font-family: myFirstFont;">
+<body style="background-image: url(images/loginbg.png);background-size:20%;background-repeat: repeat;font-family : myFirstFont">
 <div class="super_container">
 
 
@@ -125,7 +102,7 @@
                 <div class="col">
                     <div class="header_content d-flex flex-row align-items-center justify-content-start textrtl ">
                         <div class="logo">
-                            <a href="#">
+                            <a href="http://cdsapply.com">
                                 <div class="text-center">CDS</div>
                                 <div>we build careers</div>
                             </a>
@@ -136,8 +113,8 @@
                                 <li><a href="index.html" style="font-size: 12px;">  < صفحه اصلی</a></li>
                                 <li><a href="index_english.html" class="btn btn-outline-light" href="index.html">EN</a></li>
                                 <li class=" rounded">
-                                    <button type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
-                                    <input class="search-input" name="q" type="text" placeholder="  جست و جو..." value=""   />
+                                    <button onclick="gotosearch()" type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
+                                    <input class="search-input" name="q" id="searchQ" type="text" placeholder="  جست و جو..." value=""   />
                                 </li>
                             </ul>
                         </nav>
@@ -173,14 +150,14 @@
 
                 <li><a href="index.html">صفحه اصلی</a></li>
                 <li >
-                    <button type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
-                    <input class="search-input" name="q" type="text" placeholder="  جست و جو..." value=""   />
+                    <button onclick="gotosearch()" type="submit" aria-label="Search..." class="search-btn"><i class="fa fa-search"></i></button>
+                    <input id="searchQ" class="search-input" name="q" type="text" placeholder="  جست و جو..." value=""   />
                 </li>
             </ul>
 
         </div>
         <div class="menu_reservations_phone ml-auto"><div class="logo">
-            <a href="#">
+            <a href="http://cdsapply.com">
                 <div>CDS</div>
                 <div class="mt-auto">we build careers</div>
             </a>
@@ -189,7 +166,7 @@
 
 
 
-    <div class="home">
+   <div class="home">
         <div class="parallax_background parallax-window" data-parallax="scroll" id="main_backimg" data-speed="1.2"></div>
         <div class="home_container text-center">
             <div class="container">
@@ -213,11 +190,16 @@
     </div>
 
 
-    <div>
+    <div class="m-5">
         <div class="container">
-            <div class=" border border-dark bg-white boxt " >
-                <div class="text-center" style="height: 500px;font-size: 56px;padding-top: 200px">MY CONTENT</div>
+            <div class="row align-items-center" id="cards">
+                
+                <!-- fetch here -->
+
+
+
             </div>
+
         </div>
     </div>
 
@@ -237,7 +219,7 @@
                 </div>
                 <div class="home_text col-lg-6" style="margin-top: 20px;font-size: 11px">
                     Designed by:
-                    <a href="#" class="mt-0">yucatán</a>
+                    <a href="http://unixerr.com" class="mt-0">yucatán</a>
                 </div>
 
             </div>
@@ -246,6 +228,7 @@
 </div>
 
 <script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/fetch/cards.js"></script>
 <script src="styles/bootstrap-4.1.2/popper.js"></script>
 <script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
 <script src="plugins/greensock/TweenMax.min.js"></script>
@@ -280,6 +263,27 @@
 </script>
 <script>
     AOS.init();
+</script>
+
+<script>
+
+    var svalue = ''
+    function gotosearch(){
+            window.location = `http://www.google.com.pk/search?btnG=1&pws=0&q=${svalue} site:cdsapply.com`
+            return true;       
+        }
+
+    window.onload=function(){
+
+        var input = document.getElementById("searchQ");
+        input.addEventListener("keydown", function(event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            svalue = input.value
+            document.getElementById("searchQbtn").click();
+          }
+        });
+    }
 </script>
 
 </body>
