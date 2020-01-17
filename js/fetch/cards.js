@@ -58,7 +58,11 @@ fetch(`http://cdsapply.com:2017/api/collections/get/${collection}?token=account-
 
 
 				    		if(lang == "en" && posts[i].en_title != ""){
+    
 					    		$('head').append(`<meta name="description" content=${posts[i].tags.join()}>`);
+					    		for(i = 0; i < posts[i].tags.length; i++){
+						            $('head').append(`<meta name="description" content=${posts[i].tags[i]}>`);
+						        }
 					    		$('head').append(`<title>CANDO Study Abroad Agency | ${posts[i].en_title} - ${collections[0].en_name} </title>`);
 				    			cardImg.setAttribute("alt", posts[i].en_title)
 				    			cardHeader.appendChild(document.createTextNode(posts[i].en_title))
@@ -69,6 +73,9 @@ fetch(`http://cdsapply.com:2017/api/collections/get/${collection}?token=account-
 				    		}
 				    		if(lang == "fa" && posts[i].title != ""){
 				    			$('head').append(`<meta name="description" content=${posts[i].tags.join()}>`);
+				    			for(i = 0; i < posts[i].tags.length; i++){
+						            $('head').append(`<meta name="description" content=${posts[i].tags[i]}>`);
+						        }
 					    		$('head').append(`<title>موسسه اعزام دانشحو کندو  | ${posts[i].title} - ${collections[0].name}</title>`);
 				    			cardImg.setAttribute("alt", posts[i].title)
 				    			cardHeader.appendChild(document.createTextNode(posts[i].title))

@@ -25,6 +25,10 @@ fetch(`http://cdsapply.com:2017/api/collections/get/post?token=account-3eb37339b
         	 $('meta[name=description]').remove();
         	 $('title').remove();
     		 $('head').append(`<meta name="description" content=${posts[0].tags.join()}>`);
+             for(i = 0; i < posts[0].tags.length; i++){
+                $('head').append(`<meta name="description" content=${posts[0].tags[i]}>`);
+             }
+
         if(lang == "fa"){
     		$('head').append(`<title>موسسه اعزام دانشجو کندو  | ${posts[0].title}</title>`);
         	document.getElementById('content').appendChild(document.createTextNode(posts[0].content))
